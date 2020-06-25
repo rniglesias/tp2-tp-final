@@ -29,6 +29,17 @@ class Cliente {
         })
     }
 
+    async eliminarProfesor(legajo){
+
+        const options = {
+            method: 'DELETE',
+            uri: this.serverUrl + '/' + legajo,
+            json: true
+        }
+
+        return await request(options)
+    }
+
     async buscarTodos() {
         const cliDTOs = await request({
             method: 'GET',

@@ -1,6 +1,4 @@
 import MysqlClient from './mysqlDBClient.js'
-import NullDbClient from './NullDbClient.js'
-import Config from '../config.js'
 
 let mysqlClient = null
 
@@ -11,16 +9,9 @@ function getMysqlClient() {
     return mysqlClient
 }
 
-function getNullDbClient() {
-    return new NullDbClient()
-}
-
 class DbClientFactory {
     static getDbClient() {
-        switch (Config.db.client) {
-            case 'mysql': return getMysqlClient()
-            default: return getNullDbClient()
-        }
+        return getMysqlClient()
     }
 }
 

@@ -43,18 +43,19 @@ class Profesor {
     static validar(profesor) {
         const profesorSchema = {
             dni: Joi.number().min(1).max(99999999).required(),
-            legajo: Joi.number().integer().min(0).required(),
-            nombre: Joi.string().alphanum().min(1).required(),
-            apellido: Joi.string().alphanum().min(1).required(),
             direccion: Joi.string().alphanum().min(1).required(),
             telefono: Joi.number().integer().min(0),
-            email: Joi.string().alphanum().min(1).required(),
+            email: Joi.string().min(1).required(),
+            nombre: Joi.string().alphanum().min(1).required(),
+            apellido: Joi.string().alphanum().min(1).required(),
+            legajo: Joi.number().integer().min(0).required(),            
         }
 
         const { error } = Joi.validate(profesor, profesorSchema)
         if (error) {
             throw error
         }
+        return true
     }
 
 }

@@ -10,7 +10,6 @@ function getProfesorRouter() {
 
     router.post('/', async (req, res) => {
         const profesorParaAgregar = req.body
-
         try {
             await profesorApi.agregar(profesorParaAgregar)
             res.status(201).json(profesorParaAgregar)
@@ -30,9 +29,11 @@ function getProfesorRouter() {
     })
 
     router.delete('/:legajo', async (req, res) => {
+        let resultadoEliminar
         try {
-            await profesorApi.borrar(req.params.legajo)
-            res.status(204).send()
+            resultadoEliminar = await profesorApi.borrar(req.params.legajo)
+            //res.status(204).send(resultadoEliminar)
+            res.json(resultadoEliminar)
         } catch (err) {
             res.status(err.estado).json(err)
         }

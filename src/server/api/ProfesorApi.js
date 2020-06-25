@@ -12,7 +12,11 @@ class ProfesorApi {
 
     async agregar(datos) {
         ProfesorApi.asegurarProfesorValido(datos)
-        await this.profesorDao.insertarProfesor(datos)
+        let respuesta = await this.profesorDao.insertarProfesor(datos)
+        
+        if (respuesta.error) {
+            throw new CustomError(400, 'no puedo agregar al profesor', datos)
+        }
     }
 
     async buscar(queryParams) {
@@ -28,7 +32,8 @@ class ProfesorApi {
     }
 
     async borrar(legajo) {
-        await this.profesorDao.eliminarProfesor(legajo)
+        let respuesta = await this.profesorDao.eliminarProfesor(legajo)
+        return respuesta
     }
 
     async modificar(datosnuevos) {
@@ -40,7 +45,7 @@ class ProfesorApi {
         try {
             Profesor.validar(profesor)
         } catch (error) {
-            throw new CustomError(400, 'el estudiante posee un formato json invalido o faltan datos', error)
+            throw new CustomError(400, 'el profesor posee un formato json invalido o faltan datos', error)
         }
     }
 
