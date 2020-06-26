@@ -5,7 +5,7 @@
   "description": "",
   "main": "testEstudiantes.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./test/testProfes.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "request": "^2.88.2",
     "request-promise-native": "^1.0.8",
     "sqlite3": "^4.2.0",
+    "dotenv": "^8.2.0",
     "underscore": "^1.10.2"
   },
   "devDependencies": {

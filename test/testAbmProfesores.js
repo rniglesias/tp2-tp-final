@@ -1,4 +1,4 @@
-import crearServidor from './servidor.js'
+import crearServidor from '../src/server/app.js'
 import crearCliente from './client.js'
 
 
@@ -83,11 +83,11 @@ async function main(){
     ]
     
 
-    const app = crearServidor()
+    const app = new crearServidor()
     const url = 'http://localhost'
-    const PORT = 8080
-    const server = app.listen(PORT, async () => {       
-         console.log(`Servidor express escuchando en el puerto ${PORT}`)
+    const port = 8080
+    const server = app.listen(port, async () => {       
+         console.log(`Servidor express escuchando en el puerto ${port}`)
          const actualPort = server.address().port
          const cli = crearCliente(url,actualPort)
 
