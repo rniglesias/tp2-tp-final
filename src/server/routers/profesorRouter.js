@@ -28,6 +28,17 @@ function getProfesorRouter() {
         }
     })
 
+    router.get('/getcursosporlegajo/:legajo', async(req,res) => {
+        let resultadoBuscarCursos
+        try {
+            resultadoBuscarCursos = await profesorApi.buscarCursos(req.params.legajo)
+            res.json(resultadoBuscarCursos)
+        } catch (err) {
+            res.status(err.estado).json(err)
+        }
+
+    })
+
     router.delete('/:legajo', async (req, res) => {
         let resultadoEliminar
         try {
@@ -37,6 +48,29 @@ function getProfesorRouter() {
         } catch (err) {
             res.status(err.estado).json(err)
         }
+    })
+
+    router.delete('/:curso/:legajo', async (req, res) => {
+        let resultadoEliminar
+        try {
+            resultadoEliminar = await profesorApi.eliminarCursoDeProfesor(req.params.curso, req.params.legajo)
+            res.json(resultadoEliminar)
+        } catch (err) {
+            res.status(err.estado).json(err)
+        }
+    })
+
+    router.put('/cursoaprofesor/', async (req, res) => {
+        //res.send("agregar el curso " + req.body.curso + " al profesor " + req.body.legajo)
+
+        let resultadoAsignarCurso
+        try {
+            resultadoAsignarCurso = await profesorApi.asignarCursoAProfesor(req.body.curso, req.body.legajo)
+            res.json(resultadoAsignarCurso)
+        } catch (err) {
+            res.status(err.estado).json(err)
+        }
+
     })
 
     router.put('/', async (req, res) => {

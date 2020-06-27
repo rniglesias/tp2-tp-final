@@ -31,6 +31,12 @@ class ProfesorApi {
         return profesores
     }
 
+    async buscarCursos(legajo) {
+        let cursos
+        cursos = await this.profesorDao.buscarCursosDeProfesor(legajo)
+        return cursos
+    }
+
     async borrar(legajo) {
         let respuesta = await this.profesorDao.eliminarProfesor(legajo)
         return respuesta
@@ -39,6 +45,18 @@ class ProfesorApi {
     async modificar(datosnuevos) {
         ProfesorApi.asegurarProfesorValido(datosnuevos)
         await this.profesorDao.modificarProfesor(datosnuevos)
+    }
+
+    async asignarCursoAProfesor(curso, legajo)
+    {
+        let respuesta = await this.profesorDao.asignarCursoAProfesor(curso, legajo)
+        return respuesta
+    }
+
+    async eliminarCursoDeProfesor(curso, legajo)
+    {
+        let respuesta = await this.profesorDao.eliminarCursoDeProfesor(curso, legajo)
+        return respuesta
     }
 
     static asegurarProfesorValido(profesor) {

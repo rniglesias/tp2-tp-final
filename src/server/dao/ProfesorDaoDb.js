@@ -192,6 +192,100 @@ class ProfesorDaoDb extends ProfesorDao {
         return resultado
     }
 
+    async buscarCursosDeProfesor(nroLegajo) { 
+    
+        let resultado = null
+        try {
+            resultado = await this.db.client.select('NombreCurso').from('Empleados').innerJoin('ProfesoresCursos', 'ProfesoresCursos.legajo', 'Empleados.legajo' )
+            .innerJoin('Curso', 'Curso.idCurso', 'ProfesoresCursos.idCurso').where('ProfesoresCursos.legajo', nroLegajo)
+    
+            if(resultado.length == 0){
+                resultado = {
+                    "error": 400,
+                    "msg": "El profesor no tiene cursos activos"
+                }
+            }
+        }
+        catch(error) {
+            resultado = {
+                "error": 400,
+                "msg": error
+            }
+            return resultado
+        }
+    
+        return resultado
+    }   
+
+    async asignarCursoAProfesor(idcurso,legajo)
+    {
+        // Verificar que el profesor exista
+        let buscarProfe
+        let resultado
+
+        
+        try {
+            buscarProfe =  await this.db.client.select().from('empleados')
+            .where('empleados.legajo', '=' , legajo)
+                    
+            if ( buscarProfe.length) {
+                
+                // El profesor existe, debo cargar el curso
+                // Actualizo la tabla Profesores/Cursos
+                try {
+                    resultado = await this.db.client.insert({'legajo':legajo, 'idcurso':idcurso})
+                    .into('profesorescursos')
+
+                } catch (error) {
+                    resultado = {
+                        "error": 400,
+                        "msg": error
+                    }
+                    return resultado
+                }
+
+            } else {
+                // El profesor no existe, debo devolver un error
+                resultado = {
+                    "error": 400,
+                    "msg": "El profesor no existe"
+                }
+                return resultado
+            }
+
+        } catch (error) {
+            resultado = {
+                "error": 400,
+                "msg": error
+            }
+            return resultado
+        }
+    
+        return resultado
+
+    }
+
+    async eliminarCursoDeProfesor(idcurso, legajo)
+    {
+        let resultado
+
+        try {
+            resultado = await this.db.client.delete()
+            .from('profesorescursos')
+            .where('profesorescursos.legajo', '=', legajo)
+            .andWhere('profesorescursos.idcurso', '=', idcurso)
+        } catch (error) {
+            resultado = {
+                "error": 400,
+                "msg": "No puedo eliminar el profesor, recibo error: " + error
+            }
+            return resultado
+        }
+
+        return resultado
+    }
+
+
 }
 
 export default ProfesorDaoDb
