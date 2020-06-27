@@ -8,7 +8,10 @@ class App {
         const app = express()
         app.use(express.json())
         app.set('json spaces', 4)
-        app.use('/api/profesores', getProfesorRouter())
+        app.use('/api/profesor', getProfesorRouter())
+        app.use('/api/alumno', getProfesorRouter())
+        app.use('/api/coordinador', getProfesorRouter())
+        app.use('/api/administrador', getProfesorRouter())
         this.app = app
 
         this.dbClient = DbClientFactory.getDbClient()
