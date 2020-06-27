@@ -25,6 +25,9 @@ class ProfesorApi {
             profesores = await this.profesorDao.leerTodosProfesor()
         } else if (queryParams.has('dni')) {
             profesores = await this.profesorDao.buscarPorDniProfesor(queryParams.get('dni'))
+        } else if (queryParams.has('legajo')) {
+            // TODO:  implementar busqueda por legajo
+            //profesores = await this.profesorDao.buscarPorLegajoProfesor(queryParams.get('legajo'))
         } else {
             throw new CustomError(400, 'parametros de consulta invalidos', queryParams)
         }

@@ -54,7 +54,7 @@ async function testObtenerPorDniProfesor(cli){
     console.log("\nCorriendo test:  Buscar profesor por dni")
     let rta = await cli.buscarPorParametros({ dni: 9700001 })
 
-    // console.log(rta)
+    //console.log(rta)
        
     if (rta.estado) {
         console.log("Test fallla con error: ", rta.descripcion)
