@@ -1,20 +1,21 @@
 import CustomError from '../errores/CustomError.js'
 import DbClient from './DbClient.js'
 import knexLib from 'knex'
-
+import Config from '../../../config.js'
 
 
 class MysqlDBClient extends DbClient {
+
     constructor() {
         super()
         this.connected = false
         this.client = knexLib({
-            client: 'mysql',
+            client: Config.client,
             connection: {
-                host:'127.0.0.1',
-                user:'root',
-                password: '',
-                database: 'instituto'
+                host: Config.host,
+                user: Config.user,
+                password: Config.password,
+                database: Config.database
             }
         })
     }

@@ -1,30 +1,19 @@
-const currentEnv = process.env.ENV || 'dev'
+const client = process.env.DB_CLIENT
+const host = process.env.DB_HOST
+const user = process.env.DB_USER
+const password = process.env.DB_PASSWORD
+const database = process.env.DB_NAME
+const mode = process.env.DB_MODE
 
-const envs = {
-    prod: {
-        port: process.env.PROD_PORT,
-        mode: process.env.PROD_MODE,
-        db: {
-            client: process.env.PROD_DB_CLIENT,
-            name: process.env.PROD_DB_NAME,
-            cnxStr: process.env.PROD_DB_CNX_STR
-        }
-    },
-    dev: {
-        port: process.env.DEV_PORT,
-        mode: process.env.DEV_MODE,
-        db: {
-            client: process.env.DEV_DB_CLIENT,
-            dbPath: process.env.DEV_DB_PATH
-        }
-    }
-}
+
 
 const config = {
-    port: envs[currentEnv].port,
-    mode: envs[currentEnv].mode,
-    db: envs[currentEnv].db,
-    debugLevel: process.env.DEBUG_LEVEL || 5
+    client: client || 'mysql',
+    host: host || '127.0.0.1',
+    user: user || 'root',
+    password: password || '',
+    database: database || 'instituto',
+    mode: mode || 'db'
 }
 
 export default config
