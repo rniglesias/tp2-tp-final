@@ -4,7 +4,7 @@ class Cliente {
 
     constructor(ipServidor, puerto) {
         this.puerto = puerto
-        this.serverUrl = `${ipServidor}:${puerto}/api/profesores`
+        this.serverUrl = `${ipServidor}:${puerto}/api/profesor`
     }
 
     async crearProfesor(profesor) {

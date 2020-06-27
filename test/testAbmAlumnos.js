@@ -1,6 +1,8 @@
-import crearServidor from '../src/server/app.js'
-import crearCliente from './client.js'
-
+/* import crearServidor from '../src/server/app.js'
+import crearCliente from './client.js' */
+import Cliente from './clientAlumnos.js'
+import Servidor from '../src/server/app.js'
+import DbClientFactory from "../src/server/db/DbClientFactory.js"
 
 async function testAgregarAlumno(cli){
 
@@ -100,7 +102,7 @@ async function main(){
     ]
     
 
-    const app = new crearServidor()
+/*     const app = new crearServidor()
     const url = 'http://localhost'
     const PORT = 8080
     const server = app.listen(PORT, async () => {       
@@ -113,7 +115,42 @@ async function main(){
              
          }           
 
+    }) */
+
+    const ipServidor = 'http://127.0.0.1'
+    
+    const app = new Servidor()
+    
+    
+    app.setOnReady(async (actualPort) => {
+        const cli = new Cliente(ipServidor, actualPort)
+        
+        let done = 0
+        let passed = 0
+        let errors = 0
+        let error = false
+
+        console.log('running tests...\n')
+//-------------------------------------cambie aca------------------------------//
+        for (const test of tests) {
+            error = await test(cli)       
+            if (error) {
+                errors ++
+            } else {
+                passed ++
+            }
+            done ++
+         }
+//-------------------------------------------------------------------//         
+        console.log(`\ndone: ${done}`)
+        console.log(`passed: ${passed}`)
+        console.log(`errors: ${errors}`)
+
+        await app.disconnect()
+        process.exit(0)
     })
+
+    app.start(8080)
     
 }
 
