@@ -99,12 +99,65 @@ async function testEliminarProfesor(cli){
     //console.log(rta)
 
     if (rta.error) {
-        console.log("Test fallla con error: ", rta.msg)
+        console.log("Test falla con error: ", rta.msg)
         return true
     } else {
         console.log("Test OK")
         return false
     }
+}
+
+
+async function testAsignarCursoAProfesor(cli) {
+    console.log("\nCorriendo test:  Asignar curso a profesor")
+    
+    let legajo = 878787
+    let curso = 100
+
+    let rta = await cli.asignarCursoAProfesor(curso,legajo)
+    //console.log(rta)
+
+    if (rta.error) {
+        console.log("Test falla con error: ", rta.msg)
+        return true
+    } else {
+        console.log("Test OK")
+        return false
+    }
+}
+
+async function testEliminarCursoDeProfesor(cli) {
+    console.log("\nCorriendo test:  Eliminar curso de profesor")
+
+    let legajo = 878787
+    let curso = 100
+
+    let rta = await cli.eliminarCursoDeProfesor(curso, legajo)
+
+    if (rta.error) {
+        console.log("Test falla con error: ", rta.msg)
+        return true
+    } else {
+        console.log("Test OK")
+        return false
+    }
+}
+
+
+async function testListarCursosProfesor(cli) {
+    console.log("\nCorriendo test: Buscar cursos de un profesor")
+
+    let rta = await cli.buscarCursosPorLegajo(1000)
+    //console.log(rta)
+
+    if (rta.error) {
+        console.log("Test falla con error: ", rta.msg)
+        return true
+    } else {
+        console.log("Test OK")
+        return false
+    }
+
 }
 
 async function main() {
@@ -114,7 +167,10 @@ async function main() {
         testObtenerPorDniProfesor,
         testbuscarTodos,
         testModificarDatosPorDniProfesor,
-        testEliminarProfesor
+        testAsignarCursoAProfesor,
+        testEliminarCursoDeProfesor,
+        testEliminarProfesor,
+        testListarCursosProfesor
     ]
 
     const ipServidor = 'http://127.0.0.1'

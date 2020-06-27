@@ -59,6 +59,35 @@ class Cliente {
         return cliDTOs
     }
 
+    async buscarCursosPorLegajo(legajo) {
+        const cliDTOs = await request({
+            method: 'GET',
+            uri: this.serverUrl + '/getcursosporlegajo/' + legajo,
+            json: true
+        })
+        return cliDTOs
+    }
+    
+    async asignarCursoAProfesor(curso, legajo) {
+        const cliDTO = await request({
+            method: 'PUT',
+            uri: this.serverUrl + '/cursoaprofesor/',
+            body: {curso, legajo},
+            json: true
+        })
+        return cliDTO
+    }
+
+    async eliminarCursoDeProfesor(curso, legajo){
+
+        const options = {
+            method: 'DELETE',
+            uri: this.serverUrl + '/' + curso + '/' + legajo,
+            json: true
+        }
+        return await request(options)
+    }
+
     async reemplazar(nuevoprofe) {
         const cliDTO = await request({
             method: 'PUT',
