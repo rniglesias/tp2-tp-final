@@ -38,7 +38,6 @@ class DatosContacto {
     }
 
     static validarDatosContacto(datosContacto) {
-        console.log(datosContacto)
         const datosContactoSchema = {
             dni: Joi.number().min(1).max(99999999).required(),
             direccion: Joi.string().alphanum().min(1).required(),

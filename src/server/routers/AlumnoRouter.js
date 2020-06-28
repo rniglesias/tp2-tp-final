@@ -8,38 +8,61 @@ function getAlumnoRouter() {
 
     const alumnoApi = new AlumnoApi()
 
-    router.get('/', async (req, res) => {
+    router.get('/', async(req, res) => {
         try {
-            const queryParams = new Map(Object.entries(req.query))
-            const alumnos = await alumnoApi.buscarAlumno(queryParams)
+            const alumnos = await alumnoApi.listarAlumnos()
             res.json(alumnos)
         }
         catch (err) {
-            res.status(err.estado).json(err)
+            let error = new CustomError(400, 'Error al traer el alumno', err)
+            res.send(error)
         }
+    })
 
+    router.get('/:dni', async (req, res) => {
+        try {
+            const dni = req.params.dni
+            const alumnos = await alumnoApi.buscarAlumno(dni)
+            res.json(alumnos)
+        }
+        catch (err) {
+            let error = new CustomError(400, 'Error al traer los alumnos', err)
+            res.send(error)
+        }
+    })
+
+    router.get('/datoscurso/:dni', async (req, res) => {
+        try {
+            const dni = req.params.dni
+            const datosCurso = await alumnoApi.buscarDatosCurso(dni)
+            res.json(datosCurso)
+        }
+        catch (err) {
+            let error = new CustomError(400, 'Error buscar los datos del curso', err)
+            res.send(error)
+        }
     })
 
     router.post('/', async (req, res) => {
         const alumnoParaAgregar = req.body
         try {
             const alumnoAgregado = await alumnoApi.agregarAlumno(alumnoParaAgregar)
-            console.log("se agegó bien carajo")
             res.status(201).json(alumnoAgregado)
         }
         catch (err) {
             let error = new CustomError(400, 'Error al agregar el alumno', err)
-            res.status(err.estado).json(err)
+            res.send(error)
         }
     })
 
     router.delete('/:dni', async (req, res) => {
         try {
-            await alumnoApi.borrarAlumno(req.params.dni)
-            res.status(204).send()
+            const dni = req.params.dni
+            const alumnoBorrado = await alumnoApi.borrarAlumno(dni)
+            res.send(alumnoBorrado)
         }
         catch (err) {
-            res.status(err.estado).json(err)
+            res.send(err)
         }
     })
 

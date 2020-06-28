@@ -13,24 +13,53 @@ class AlumnoApi {
         try{
             AlumnoApi.asegurarAlumnoValido(alumnoFormateado)
         }
-        catch (err){
-            throw err
+        catch(err){
+            throw new CustomError(304, 'Error al validar el nuevo Alumno', err)
         }
         try{
            const alumnoAgregado = await this.alumnosDao.agregarAlumno(alumnoFormateado)
         }
-        catch (err){
+        catch(err){
             throw err
         }
         return alumnoFormateado
     }
 
     async buscarAlumno(dni) {
-        const alumno = await this.alumnosDao.buscarAlumnoPorDni(dni)
-        return alumnoAgregado
+        try{
+            const alumno = await this.alumnosDao.buscarAlumnoPorDni(dni)
+            return alumno
+        }
+        catch(err){
+            throw err
+        }
     }
 
+    async listarAlumnos(){
+        const alumnos = await this.alumnosDao.listarAlumnos()
+        return alumnos
+    }
 
+    async borrarAlumno(dni){
+        try{
+            const alumno = await this.buscarAlumno(dni)
+            await this.alumnosDao.borrarAlumno(dni)
+            return alumno
+        }
+        catch(err){
+            throw new CustomError(400, 'Error al borrar el alumno', err)
+        }
+    }
+
+    async buscarDatosCurso(dni){
+        try{
+            const datosCurso = await this.alumnosDao.buscarDatosCurso(dni)
+            return datosCurso
+        }
+        catch(err){
+            throw new CursomError(400, 'Error al traer los datos del curso', err)
+        }
+    }
 
     static asegurarAlumnoValido(alumno) {
         try {
