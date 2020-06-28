@@ -3,9 +3,11 @@
   "name": "tp4mio",
   "version": "1.0.0",
   "description": "",
-  "main": "testEstudiantes.js",
+  "main": "node -r dotenv/config ./test/testProfesores.js dotenv_config_path=./.env",
   "scripts": {
-    "test": "./test/testProfes.js"
+    "testCoordinadores": "node -r dotenv/config ./test/testCoordinadores.js dotenv_config_path=./.env",
+    "testAlumnos": "node -r dotenv/config ./test/testAlumnos.js dotenv_config_path=./.env",
+    "testProfesores": "node -r dotenv/config ./test/testProfesores.js dotenv_config_path=./.env"
   },
   "keywords": [],
   "author": "",

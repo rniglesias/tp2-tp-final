@@ -1,5 +1,3 @@
-/* import crearServidor from '../src/server/app.js'
-import crearCliente from './client.js' */
 import Cliente from './clientAlumnos.js'
 import Servidor from '../src/server/app.js'
 import util from 'util'

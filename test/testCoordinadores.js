@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
-import Cliente from './clientCoordinador.js'
+import Cliente from './clientCoordinadores.js'
 import Servidor from '../src/server/app.js'
 import DbClientFactory from "../src/server/db/DbClientFactory.js"
-//import { validarCoordinador, validarCoordinadores,  } from '../src/server/validaciones/oordinadores.js'
 
 
 async function testbuscarTodos(cli){
