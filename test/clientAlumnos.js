@@ -7,12 +7,11 @@ class Cliente {
         this.serverUrl = `${ipServidor}:${puerto}/api/alumno`
     }
 
-    async obtenerPorDniAlumno(dni){
+    async obtenerAlumnoPorDni(dni){
         const options = {
             method: 'GET',
-            uri: this.serverUrl,
+            uri: this.serverUrl + '/' + dni,
             json: true,
-            qs: {dni: dni }
         }
 
         return await request(options)
@@ -34,8 +33,8 @@ class Cliente {
         const options = {
             method: 'POST',
             uri: this.serverUrl,
-            body: alumno,
-            json: true
+            json: true,
+            body: alumno
         }
 
         return await request(options)
@@ -67,9 +66,8 @@ class Cliente {
     async obtenerDatosCursoPorAlumno(dni){
         const options = {
             method: 'GET',
-            uri: this.serverUrl,
+            uri: this.serverUrl + '/datoscurso/' + dni,
             json: true,
-            qs: {dni: dni }
         }
 
         return await request(options)

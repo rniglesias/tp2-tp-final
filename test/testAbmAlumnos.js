@@ -2,11 +2,11 @@
 import crearCliente from './client.js' */
 import Cliente from './clientAlumnos.js'
 import Servidor from '../src/server/app.js'
-import DbClientFactory from "../src/server/db/DbClientFactory.js"
+import util from 'util'
 
 async function testAgregarAlumno(cli){
 
-    let dato =   {   
+    let dato1 =   {   
         dni: 30000001,    
         direccion: 'Rivadavia 1234', 
         telefono: '1152523434',
@@ -15,11 +15,11 @@ async function testAgregarAlumno(cli){
         apellido: 'Gomez',
         
     }
-    let rta = await cli.agregarAlumno(dato)
-    console.log("\nAgregar Alumno: ")
-    console.log(rta)
+    let alumno1 = await cli.agregarAlumno(dato1)
+    console.log("\nAgregar Alumno 1: ")
+    console.log(util.inspect(alumno1, {showHidden: false, depth: null, colors: true}))
 
-/*     let dato2 =   {   
+    let dato2 =   {   
         dni: 31000002,    
         direccion: 'Diaz Velez 1234', 
         telefono: '1152223434',
@@ -28,9 +28,9 @@ async function testAgregarAlumno(cli){
         apellido: 'Castro',
         
     }
-    let rta2 = await cli.agregarAlumno(dato2)
-    console.log("\nAgregar Alumno: ")
-    console.log(rta2)
+    let alumno2 = await cli.agregarAlumno(dato2)
+    console.log("\nAgregar Alumno 2: ")
+    console.log(util.inspect(alumno2, {showHidden: false, depth: null, colors: true}))
 
     let dato3 =   {   
         dni: 31000003,    
@@ -41,9 +41,9 @@ async function testAgregarAlumno(cli){
         apellido: 'Garcia',
         
     }
-    let rta3 = await cli.agregarAlumno(dato3)
-    console.log("\nAgregar Alumno: ")
-    console.log(rta3)
+    let alumno3 = await cli.agregarAlumno(dato3)
+    console.log("\nAgregar Alumno 3: ")
+    console.log(util.inspect(alumno3, {showHidden: false, depth: null, colors: true}))
 
     let dato4 =   {   
         dni: 31000125,    
@@ -54,39 +54,42 @@ async function testAgregarAlumno(cli){
         apellido: 'Garcia',
         
     }
-    let rta4 = await cli.agregarAlumno(dato4)
-    console.log("\nAgregar Alumno: ")
-    console.log(rta4) */
-
-
+    let alumno4 = await cli.agregarAlumno(dato4)
+    console.log("\nAgregar Alumno 4: ")
+    console.log(util.inspect(alumno3, {showHidden: false, depth: null, colors: true}))
 
 }
 
 async function testObtenerTodosAlumno(cli){
-    let rta = await cli.obtenerTodosAlumno()
-    console.log("\nObtener todos los estudiantes: ")
-    console.log(rta)
+    let alumnos = await cli.obtenerTodosAlumno()
+    console.log("\nObtener todos los alumnos: ")
+    console.log(util.inspect(alumnos, {showHidden: false, depth: null, colors: true}))
 }
 
-async function testObtenerPorDniAlumno(cli){
-    let rta = await cli.obtenerPorDniAlumno(30307686)
+async function testObtenerAlumnoPorDni(cli){
+    let alumno = await cli.obtenerAlumnoPorDni(30307686)
     console.log("\nBusqueda por DNI: ")
-    console.log(rta)
+    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
 }
 
 
-async function testEliminarAlumno(cli){ 
-    console.log("\nEmpezar a eliminar")    
-    let rta6 = await cli.eliminarAlumno(30000001)
-    console.log("\nEliminar un estudiante:")    
-    console.log(rta6)
+async function testEliminarAlumnoFalla(cli){
+    console.log("\nEliminar un alumno:")      
+    let alumno = await cli.eliminarAlumno(30000007)
+    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
+}
+
+async function testEliminarAlumnoExito(cli){
+    console.log("\nEliminar un alumno:")      
+    let alumno = await cli.eliminarAlumno(30000001)
+    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
 }
 
 async function testObtenerDatosCursoPorAlumno(cli){
     let dni = 29004601
-    console.log(`\nBuscando datos del curso de estudiante con dni ${dni}`)
-    let rta = await cli.obtenerDatosCursoPorAlumno(dni)
-    console.log(rta)
+    console.log(`\nBuscando datos del curso del alumno con dni ${dni}`)
+    let datosCurso = await cli.obtenerDatosCursoPorAlumno(dni)
+    console.log(util.inspect(datosCurso, {showHidden: false, depth: null, colors: true}))
 }
 
 async function main(){  
@@ -94,26 +97,11 @@ async function main(){
     const tests = [
         testAgregarAlumno,
         testObtenerTodosAlumno,
-        testObtenerPorDniAlumno,
-        testEliminarAlumno,
+        testObtenerAlumnoPorDni,
+        testEliminarAlumnoFalla,
+        testEliminarAlumnoExito,
         testObtenerDatosCursoPorAlumno,
     ]
-    
-
-/*     const app = new crearServidor()
-    const url = 'http://localhost'
-    const PORT = 8080
-    const server = app.listen(PORT, async () => {       
-         console.log(`Servidor express escuchando en el puerto ${PORT}`)
-         const actualPort = server.address().port
-         const cli = crearCliente(url,actualPort)
-
-         for (const test of tests) {
-            await test(cli)       
-             
-         }           
-
-    }) */
 
     const ipServidor = 'http://127.0.0.1'
     
