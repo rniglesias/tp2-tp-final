@@ -6,7 +6,7 @@ class ProfesorDaoDb extends ProfesorDao {
 
     constructor(){
         super()
-        this.db = DbClientFactory.getDbClient()
+        this.client = DbClientFactory.getDbClient()
         
     }
 
@@ -28,9 +28,10 @@ class ProfesorDaoDb extends ProfesorDao {
         
     
         try {
-            resultadoCargaDatos = await this.db.client.insert(datosProfe).into('Datoscontacto')
-            await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo,'tipoempleado':'Profesor'}).into('empleados')
-            await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo}).into('empleadoslegajos')
+            const db = await this.client.getDb()
+            resultadoCargaDatos = await db.insert(datosProfe).into('Datoscontacto')
+            await db.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo,'tipoempleado':'Profesor'}).into('empleados')
+            await db.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo}).into('empleadoslegajos')
         }
         catch(error) {
         
@@ -48,16 +49,17 @@ class ProfesorDaoDb extends ProfesorDao {
     async leerTodosProfesor() {  
         let listaProfes = []  
         try {  
-           listaProfes = await this.db.client.select().from('empleados')
-           .innerJoin('empleadoslegajos', 'empleadoslegajos.legajo', 'empleados.legajo')
-           .innerJoin('datoscontacto', 'datoscontacto.dni', 'empleadoslegajos.dni')
-           .where('empleados.tipoempleado', '=' , 'Profesor')
-               if(listaProfes.length == 0){
-                   resultado = {
-                       "error": 400,
-                       "msg": "No hay profesores cargados"
-                   }
-           }
+            const db = await this.client.getDb()
+            listaProfes = await this.db.client.select().from('empleados')
+            .innerJoin('empleadoslegajos', 'empleadoslegajos.legajo', 'empleados.legajo')
+            .innerJoin('datoscontacto', 'datoscontacto.dni', 'empleadoslegajos.dni')
+            .where('empleados.tipoempleado', '=' , 'Profesor')
+            if(listaProfes.length == 0){
+                resultado = {
+                    "error": 400,
+                    "msg": "No hay profesores cargados"
+                }
+            }
     
         }
         catch(error) {
@@ -76,7 +78,8 @@ class ProfesorDaoDb extends ProfesorDao {
         
         let resultado = null
         try {
-            resultado = await this.db.client.select().from('datoscontacto')
+            const db = await this.client.getDb()
+            resultado = await db.select().from('datoscontacto')
             .innerJoin('empleados', 'datoscontacto.dni', 'empleados.dni')
             .where('datoscontacto.dni', '=' , nroDni)
             .andWhere('empleados.tipoempleado','=','Profesor')
@@ -108,8 +111,8 @@ class ProfesorDaoDb extends ProfesorDao {
         try{
     
             // Voy a necesitar saber el dni del profesor para mas adelante....
-                        
-            let busquedaDNI = await this.db.client.select()
+            const db = await this.client.getDb()            
+            let busquedaDNI = await db.select()
             .from('empleadoslegajos')
             .where('empleadoslegajos.legajo', '=', legajo)
             .asCallback((err,rows) => {
@@ -121,19 +124,19 @@ class ProfesorDaoDb extends ProfesorDao {
                 dni = (JSON.parse(JSON.stringify(busquedaDNI)))[0].dni
                 // Hago el delete de las 4 tablas
                 
-                await this.db.client.delete()
+                await db.delete()
                 .from('empleadoslegajos')
                 .where('empleadoslegajos.legajo', '=', legajo)
 
-                await this.db.client.delete()
+                await db.delete()
                 .from('profesorescursos')
                 .where('profesorescursos.legajo','=',legajo)
 
-                await this.db.client.delete()
+                await db.delete()
                 .from('empleados')
                 .where('empleados.legajo', '=', legajo)
 
-                resultadoDatosPersonales = await this.db.client.delete()
+                resultadoDatosPersonales = await db.delete()
                 .from('datoscontacto')
                 .where('datoscontacto.dni', '=', dni)
             }
@@ -173,7 +176,8 @@ class ProfesorDaoDb extends ProfesorDao {
         
         let resultado
         try{
-            resultado = await this.db.client.update(datosProfe)
+            const db = await this.client.getDb()
+            resultado = await db.update(datosProfe)
             .where('dni','=',DatoscontactoNuevo.dni)
             .from('Datoscontacto')
         }catch(error){
@@ -190,7 +194,8 @@ class ProfesorDaoDb extends ProfesorDao {
     
         let resultado = null
         try {
-            resultado = await this.db.client.select('NombreCurso').from('Empleados').innerJoin('ProfesoresCursos', 'ProfesoresCursos.legajo', 'Empleados.legajo' )
+            const db = await this.client.getDb()
+            resultado = await db.select('NombreCurso').from('Empleados').innerJoin('ProfesoresCursos', 'ProfesoresCursos.legajo', 'Empleados.legajo' )
             .innerJoin('Curso', 'Curso.idCurso', 'ProfesoresCursos.idCurso').where('ProfesoresCursos.legajo', nroLegajo)
     
             if(resultado.length == 0){
@@ -219,7 +224,8 @@ class ProfesorDaoDb extends ProfesorDao {
 
         
         try {
-            buscarProfe =  await this.db.client.select().from('empleados')
+            const db = await this.client.getDb()
+            buscarProfe =  await db.select().from('empleados')
             .where('empleados.legajo', '=' , legajo)
                     
             if ( buscarProfe.length) {
@@ -227,7 +233,7 @@ class ProfesorDaoDb extends ProfesorDao {
                 // El profesor existe, debo cargar el curso
                 // Actualizo la tabla Profesores/Cursos
                 try {
-                    resultado = await this.db.client.insert({'legajo':legajo, 'idcurso':idcurso})
+                    resultado = await db.insert({'legajo':legajo, 'idcurso':idcurso})
                     .into('profesorescursos')
 
                 } catch (error) {
@@ -264,7 +270,8 @@ class ProfesorDaoDb extends ProfesorDao {
         let resultado
 
         try {
-            resultado = await this.db.client.delete()
+            const db = await this.client.getDb()
+            resultado = await db.delete()
             .from('profesorescursos')
             .where('profesorescursos.legajo', '=', legajo)
             .andWhere('profesorescursos.idcurso', '=', idcurso)
