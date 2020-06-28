@@ -2,8 +2,8 @@ import Joi from '@hapi/joi'
 
 class Profesor {
 
-    constructor(id, legajo, nombre, apellido, direccion, telefono, email) {
-        this.id = id
+    constructor(dni, legajo, nombre, apellido, direccion, telefono, email) {
+        this.dni = dni
         this.legajo = legajo
         this.nombre = nombre
         this.apellido = apellido

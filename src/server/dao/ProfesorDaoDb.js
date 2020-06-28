@@ -12,13 +12,11 @@ class ProfesorDaoDb extends ProfesorDao {
 
     async insertarProfesor(datoscontacto) {
         let resultadoCargaDatos
-        let resultadoCargaEmpleado
-        let resultadoCargaLegajo
         let resultado
     
-        
-
-        // Para que tome la estructura de datos que necesita la tabla datos de contacto, me sobra el legajo
+        // Para que tome la estructura de datos que necesita la tabla datos de contacto, 
+        // me sobra el legajo
+    
         const datosProfe = {
             dni: datoscontacto.dni,
             nombre: datoscontacto.nombre,
@@ -31,8 +29,8 @@ class ProfesorDaoDb extends ProfesorDao {
     
         try {
             resultadoCargaDatos = await this.db.client.insert(datosProfe).into('Datoscontacto')
-            resultadoCargaEmpleado = await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo,'tipoempleado':'Profesor'}).into('empleados')
-            resultadoCargaLegajo = await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo}).into('empleadoslegajos')
+            await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo,'tipoempleado':'Profesor'}).into('empleados')
+            await this.db.client.insert({'dni':datoscontacto.dni, 'legajo':datoscontacto.legajo}).into('empleadoslegajos')
         }
         catch(error) {
         
@@ -74,7 +72,7 @@ class ProfesorDaoDb extends ProfesorDao {
 
     async buscarPorDniProfesor(nroDni) { 
 
-        // Cambiarlo a por legajo
+        // A considerar: Cambiarlo a por legajo?
         
         let resultado = null
         try {
@@ -103,9 +101,6 @@ class ProfesorDaoDb extends ProfesorDao {
     async eliminarProfesor(legajo){
 
         let resultadoDatosPersonales
-        let resultadoEmpleadosLegajos
-        let resultadoEmpleados
-        let resultadoProfesoresCursos
         let dni = 0
         let resultado
         
@@ -113,8 +108,7 @@ class ProfesorDaoDb extends ProfesorDao {
         try{
     
             // Voy a necesitar saber el dni del profesor para mas adelante....
-            // console.log("voy a buscar primero a ver si esta este legajo: (",legajo,"), asi le asocio el dni")
-            
+                        
             let busquedaDNI = await this.db.client.select()
             .from('empleadoslegajos')
             .where('empleadoslegajos.legajo', '=', legajo)
@@ -127,15 +121,15 @@ class ProfesorDaoDb extends ProfesorDao {
                 dni = (JSON.parse(JSON.stringify(busquedaDNI)))[0].dni
                 // Hago el delete de las 4 tablas
                 
-                resultadoEmpleadosLegajos = await this.db.client.delete()
+                await this.db.client.delete()
                 .from('empleadoslegajos')
                 .where('empleadoslegajos.legajo', '=', legajo)
 
-                resultadoProfesoresCursos = await this.db.client.delete()
+                await this.db.client.delete()
                 .from('profesorescursos')
                 .where('profesorescursos.legajo','=',legajo)
 
-                resultadoEmpleados = await this.db.client.delete()
+                await this.db.client.delete()
                 .from('empleados')
                 .where('empleados.legajo', '=', legajo)
 
@@ -165,9 +159,9 @@ class ProfesorDaoDb extends ProfesorDao {
 
     async modificarProfesor(DatoscontactoNuevo) {
     
-        // Corregir y hacer por legajo mejor?  Porque así como está solo modifica los datos de contacto
-    
-        // Para que tome la estructura de datos que necesita la tabla datos de contacto, me sobra el legajo
+        // Para que tome la estructura de datos que necesita la tabla datos de contacto, 
+        // me sobra el legajo
+
         const datosProfe = {
             dni: DatoscontactoNuevo.dni,
             nombre: DatoscontactoNuevo.nombre,

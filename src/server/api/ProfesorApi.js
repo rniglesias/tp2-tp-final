@@ -11,8 +11,10 @@ class ProfesorApi {
 
 
     async agregar(datos) {
-        ProfesorApi.asegurarProfesorValido(datos)
-        let respuesta = await this.profesorDao.insertarProfesor(datos)
+        // Instancio un profesor y lo valido
+        let profesor = new Profesor(datos.dni,datos.legajo,datos.nombre,datos.apellido,datos.direccion,datos.telefono,datos.email)
+        ProfesorApi.asegurarProfesorValido(profesor)
+        let respuesta = await this.profesorDao.insertarProfesor(profesor)
         
         if (respuesta.error) {
             throw new CustomError(400, 'no puedo agregar al profesor', datos)
