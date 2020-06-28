@@ -66,7 +66,7 @@ class ProfesorApi {
         try {
             Profesor.validar(profesor)
         } catch (error) {
-            throw new CustomError(400, 'el profesor posee un formato json invalido o faltan datos', error)
+            throw new CustomError(400, 'El profesor posee un formato json invalido o faltan datos', error)
         }
     }
 

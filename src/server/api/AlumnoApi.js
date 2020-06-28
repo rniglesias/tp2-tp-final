@@ -1,5 +1,5 @@
-import Alumno from '../modelos/AlumnoModelo.js'
-import CustomError from '../errores.CustomErrores.js'
+import AlumnoModelo from '../modelo/AlumnoModelo.js'
+import CustomError from '../errores/CustomError.js'
 import AlumnoDaoFactory from '../dao/AlumnoDaoFactory.js'
 
 class AlumnoApi {
@@ -8,9 +8,25 @@ class AlumnoApi {
         this.alumnosDao = AlumnoDaoFactory.getDao()
     }
 
-    async agregarAlumno(alumnoParaAgregar) {
-        AlumnoApi.asegurarAlumnoValido(alumnoParaAgregar)
-        const alumnoAgregado = await this.alumnosDao.add(alumnoParaAgregar)
+    async agregarAlumno(al) {
+        let alumnoFormateado = new AlumnoModelo(al.dni,al.direccion,al.telefono,al.email,al.nombre,al.apellido)
+        try{
+            AlumnoApi.asegurarAlumnoValido(alumnoFormateado)
+        }
+        catch (err){
+            throw err
+        }
+        try{
+           const alumnoAgregado = await this.alumnosDao.agregarAlumno(alumnoFormateado)
+        }
+        catch (err){
+            throw err
+        }
+        return alumnoFormateado
+    }
+
+    async buscarAlumno(dni) {
+        const alumno = await this.alumnosDao.buscarAlumnoPorDni(dni)
         return alumnoAgregado
     }
 

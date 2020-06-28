@@ -16,10 +16,10 @@ async function testAgregarAlumno(cli){
         
     }
     let rta = await cli.agregarAlumno(dato)
-    console.log("\nAgregar Dato Contacto: ")
+    console.log("\nAgregar Alumno: ")
     console.log(rta)
 
-    let dato2 =   {   
+/*     let dato2 =   {   
         dni: 31000002,    
         direccion: 'Diaz Velez 1234', 
         telefono: '1152223434',
@@ -29,7 +29,7 @@ async function testAgregarAlumno(cli){
         
     }
     let rta2 = await cli.agregarAlumno(dato2)
-    console.log("\nAgregar Dato Contacto: ")
+    console.log("\nAgregar Alumno: ")
     console.log(rta2)
 
     let dato3 =   {   
@@ -42,7 +42,7 @@ async function testAgregarAlumno(cli){
         
     }
     let rta3 = await cli.agregarAlumno(dato3)
-    console.log("\nAgregar Dato Contacto: ")
+    console.log("\nAgregar Alumno: ")
     console.log(rta3)
 
     let dato4 =   {   
@@ -55,8 +55,8 @@ async function testAgregarAlumno(cli){
         
     }
     let rta4 = await cli.agregarAlumno(dato4)
-    console.log("\nAgregar Dato Contacto: ")
-    console.log(rta4)
+    console.log("\nAgregar Alumno: ")
+    console.log(rta4) */
 
 
 
@@ -69,7 +69,7 @@ async function testObtenerTodosAlumno(cli){
 }
 
 async function testObtenerPorDniAlumno(cli){
-    let rta = await cli.obtenerPorDniAlumno(30000114)
+    let rta = await cli.obtenerPorDniAlumno(30307686)
     console.log("\nBusqueda por DNI: ")
     console.log(rta)
 }
@@ -88,8 +88,6 @@ async function testObtenerDatosCursoPorAlumno(cli){
     let rta = await cli.obtenerDatosCursoPorAlumno(dni)
     console.log(rta)
 }
-
-
 
 async function main(){  
 
@@ -124,7 +122,6 @@ async function main(){
     
     app.setOnReady(async (actualPort) => {
         const cli = new Cliente(ipServidor, actualPort)
-        
         let done = 0
         let passed = 0
         let errors = 0

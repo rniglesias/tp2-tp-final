@@ -1,4 +1,4 @@
-import CustomError from '../errores/CustomErrores.js'
+import CustomError from '../errores/CustomError.js'
 
 class AlumnoDao {
 

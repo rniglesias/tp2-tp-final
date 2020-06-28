@@ -31,7 +31,6 @@ class Cliente {
 
 
     async agregarAlumno(alumno){
-
         const options = {
             method: 'POST',
             uri: this.serverUrl,
