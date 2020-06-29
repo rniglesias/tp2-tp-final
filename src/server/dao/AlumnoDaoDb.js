@@ -37,7 +37,30 @@ class AlumnoDaoDb extends AlumnoDao {
             }
         }
         catch (err) {
-            throw new CustomError(500, 'Error al buscar el alumno', err)
+            if(!(err instanceof CustomError)){
+                throw new CustomError(500, 'Error al buscar el alumno', err)
+            }
+            throw err
+            
+        }
+    }
+
+    async buscarCurso(idCurso) {
+        try {
+            const db = await this.client.getDb()
+            const curso = await db.select().from('curso').where('curso.idCurso', '=', idCurso)
+            if(curso.length != 0){
+                return curso
+            }
+            else{
+                throw new CustomError(404, 'No hay ningún curso con el ID informado')
+            }
+        }
+        catch (err) {
+            if(!(err instanceof CustomError)){
+                throw new CustomError(400, 'Error al buscar el curso', err)
+            }
+            throw err
         }
     }
 
@@ -61,6 +84,39 @@ class AlumnoDaoDb extends AlumnoDao {
         catch(err){
             throw new CustomError(400, 'Error al eliminar el alumno', err)
         }           
+    }
+
+    async modificarCursoAlumno(datos){
+        try{
+            const db = await this.client.getDb()
+            await db.update(datos).from('estudiante').where('estudiante.dni', '=', datos.dni)
+        }
+        catch(err){
+            throw new CustomError(400, 'Error al agregar el alumno al curso', err)
+        }       
+    }
+
+    async modificarAlumno(alumno){
+        let alumnoDatos = {
+            dni: alumno.dni,
+            idCurso: alumno.idCurso
+        }
+        let datosContactoDatos = {
+            dni: alumno.dni,    
+            direccion: alumno.direccion, 
+            telefono: alumno.telefono,
+            email: alumno.email,
+            nombre: alumno.nombre,
+            apellido: alumno.apellido
+        }
+        try{
+            const db = await this.client.getDb()
+            await db.update(datosContactoDatos).from('datoscontacto').where('datoscontacto.dni', '=', alumno.dni)
+            await db.update(alumnoDatos).from('estudiante').where('estudiante.dni', '=', alumno.dni)            
+        }
+        catch(err){
+            throw new CustomError(400, 'Error al modificar al alumno', err)
+        }         
     }
 
     async buscarDatosCurso(dni){

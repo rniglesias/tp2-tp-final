@@ -67,17 +67,29 @@ function getAlumnoRouter() {
     })
 
     router.put('/:dni', async (req, res) => {
-        const alumnoParaReemplazar = req.body
+        const alumnoParaModificar = req.body
         try {
-            const alumnoReemplazado = await alumnoApi.reemplazarAlumno(req.params.dni, alumnoParaReemplazar)
-            res.json(alumnoReemplazado)
+            const alumnoModificado = await alumnoApi.modificarAlumno(alumnoParaModificar)
+            res.json(alumnoModificado)
         }
         catch (err) {
-            res.status(err.estado).json(err)
+            res.send(err)
         }
 
     })
 
+    router.put('/cursoAlumno/:dni', async (req, res) => {
+        
+        const datos = req.body
+        try {
+            const alumnoConCurso = await alumnoApi.modificarCursoAlumno(datos)
+            res.json(alumnoConCurso)
+        }
+        catch (err) {
+            res.send(err)
+        }
+
+    })
     return router
 
 }

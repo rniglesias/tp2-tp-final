@@ -35,6 +35,16 @@ class AlumnoApi {
         }
     }
 
+    async buscarCurso(idCurso) {
+        try{
+            const curso = await this.alumnosDao.buscarCurso(idCurso)
+            return curso
+        }
+        catch(err){
+            throw err
+        }
+    }
+
     async listarAlumnos(){
         const alumnos = await this.alumnosDao.listarAlumnos()
         return alumnos
@@ -47,7 +57,11 @@ class AlumnoApi {
             return alumno
         }
         catch(err){
-            throw new CustomError(400, 'Error al borrar el alumno', err)
+            if(!(err instanceof CustomError)){
+                throw new CustomError(400, 'Error al borrar el alumno', err)
+            }
+            throw err
+            
         }
     }
 
@@ -57,7 +71,35 @@ class AlumnoApi {
             return datosCurso
         }
         catch(err){
-            throw new CursomError(400, 'Error al traer los datos del curso', err)
+            throw new CustomError(400, 'Error al traer los datos del curso', err)
+        }
+    }
+
+    async modificarCursoAlumno(datos){
+        try{
+            await this.buscarAlumno(datos.dni)
+            await this.buscarCurso(datos.idCurso)
+            await this.alumnosDao.modificarCursoAlumno(datos)
+            const alumno = await this.buscarAlumno(datos.dni)
+            return alumno
+        }
+        catch(err){
+            if(!(err instanceof CustomError)){
+                throw new CustomError(400, 'Error al agregar curso al alumno', err)
+            }
+            throw err
+        }
+    }
+
+    async modificarAlumno(alumno){
+        try{
+            await this.buscarAlumno(alumno.dni)
+            await this.alumnosDao.modificarAlumno(alumno)
+            const alumnoModificado = await this.buscarAlumno(alumno.dni)
+            return alumnoModificado
+        }
+        catch(err){
+            throw new CustomError(400, 'Error al modificar alumno', err)
         }
     }
 

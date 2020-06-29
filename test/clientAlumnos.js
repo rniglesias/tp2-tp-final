@@ -40,15 +40,27 @@ class Cliente {
         return await request(options)
     }
 
-    async modificarAlumno(Alumno,dni){
+    async modificarAlumno(alumno){
 
         const options = {
             method: 'PUT',
-            uri: this.serverUrl + '/' + dni,
+            uri: this.serverUrl + '/' + alumno.dni,
             body: alumno,
             json: true
         }
 
+        return await request(options)
+    }
+
+    async modificarCursoAlumno(dni, idCurso){
+ 
+        const options = {
+            method: 'PUT',
+            uri: this.serverUrl + '/cursoAlumno/' + dni,
+            body: {dni, idCurso},
+            json: true
+        }
+        
         return await request(options)
     }
     

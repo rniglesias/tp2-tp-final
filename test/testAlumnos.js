@@ -90,6 +90,31 @@ async function testObtenerDatosCursoPorAlumno(cli){
     console.log(util.inspect(datosCurso, {showHidden: false, depth: null, colors: true}))
 }
 
+async function testModificarCursoAlumno(cli){  
+    let dni = 31000002
+    let idCurso = 100
+    console.log("\nAgregar curso a un alumno:")  
+        
+    let alumno = await cli.modificarCursoAlumno(dni,idCurso)
+    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
+}
+
+async function testModificarAlumno(cli){  
+    let datosParaModificar =   {   
+        dni: 31000125,    
+        direccion: 'Caracas 1236', 
+        telefono: '1151444435',
+        email: 'jlian@mail.com',
+        nombre: 'Julian',
+        apellido: 'Garcia',
+        idCurso: 100
+    }
+    console.log("\Modificar datos de un alumno:")  
+        
+    let alumno = await cli.modificarAlumno(datosParaModificar)
+    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
+}
+
 async function main(){  
 
     const tests = [
@@ -99,6 +124,8 @@ async function main(){
         testEliminarAlumnoFalla,
         testEliminarAlumnoExito,
         testObtenerDatosCursoPorAlumno,
+        testModificarCursoAlumno,
+        testModificarAlumno
     ]
 
     const ipServidor = 'http://127.0.0.1'
