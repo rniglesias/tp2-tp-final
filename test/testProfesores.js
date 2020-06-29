@@ -63,6 +63,21 @@ async function testObtenerPorDniProfesor(cli){
     }
 }
 
+async function testObtenerPorLegajoProfesor(cli){
+    console.log("\nCorriendo test:  Buscar profesor por legajo")
+    let rta = await cli.buscarPorParametros({ legajo: 878787 })
+
+    //console.log(rta)
+       
+    if (rta.estado) {
+        console.log("Test fallla con error: ", rta.descripcion)
+        return true
+    } else {
+        console.log("Test OK")
+        return false
+    }
+}
+
 async function testModificarDatosPorDniProfesor(cli){
 
     console.log("\nCorriendo test:  Modificar datos de un profesor")
@@ -163,6 +178,7 @@ async function main() {
     const tests = [
         testAgregarProfesor,
         testObtenerPorDniProfesor,
+        testObtenerPorLegajoProfesor,
         testbuscarTodos,
         testModificarDatosPorDniProfesor,
         testAsignarCursoAProfesor,

@@ -1,5 +1,6 @@
 import ProfesorDao from './ProfesorDao.js'
 import DbClientFactory from '../db/DbClientFactory.js'
+//import { where } from 'underscore'
 
 
 class ProfesorDaoDb extends ProfesorDao {
@@ -72,10 +73,35 @@ class ProfesorDaoDb extends ProfesorDao {
         return listaProfes
     }   
 
+
+    async buscarPorLegajoProfesor(legajo) {
+        let resultado
+
+        try {
+            const db = await this.client.getDb()
+            resultado = await db.select().from('datoscontacto')
+            .innerJoin('empleados','datoscontacto.dni', 'empleados.dni')
+            .where('empleados.legajo', '=', legajo)
+            .andWhere('empleados.tipoempleado', '=', 'Profesor')
+            if(resultado.length == 0) {
+                resultado = {
+                    "error": 400,
+                    "msg": "Legajo no encontrado"
+                }
+                return resultado
+            }
+        } catch(error) {
+                resultado = {
+                    "error": 400,
+                    "msg": "Error de consulta: " + error
+                }
+                return resultado
+        }
+        return resultado
+    }  
+
     async buscarPorDniProfesor(nroDni) { 
 
-        // A considerar: Cambiarlo a por legajo?
-        
         let resultado = null
         try {
             const db = await this.client.getDb()
@@ -94,7 +120,7 @@ class ProfesorDaoDb extends ProfesorDao {
         catch(error) {
             resultado = {
                 "error": 400,
-                "msg": error
+                "msg": "Error de consulta: " + error
             }
             return resultado
         }
