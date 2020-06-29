@@ -53,9 +53,9 @@ class CoordinadorApi {
         return respuesta
     }
 
-    async crearCursoNuevo(idcurso, nombrecurso, fechaclase)
+    async crearCursoNuevo(cursoNuevo)
     {   
-        let respuesta = await this.coordinadorDao.crearCursoNuevo(idcurso, nombrecurso, fechaclase)
+        let respuesta = await this.coordinadorDao.crearCursoNuevo(cursoNuevo)
         return respuesta
     }
 

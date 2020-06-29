@@ -77,7 +77,7 @@ function getCoordinadorRouter() {
         //res.send("agregar el curso " + req.body.curso + " al coordinador " + req.body.legajo)
         let resultadoCursoNuevo
         try {
-            resultadoCursoNuevo = await coordinadorApi.crearCursoNuevo(req.body.idcurso, req.body.nombrecurso, req.body.fechaclase)
+            resultadoCursoNuevo = await coordinadorApi.crearCursoNuevo(req.body)
             res.json(resultadoCursoNuevo)
         } catch (err) {
             res.status(err.estado).json(err)

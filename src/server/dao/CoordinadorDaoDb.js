@@ -271,15 +271,14 @@ class CoordinadorDaoDb extends CoordinadorDao {
 
     }
 
-    async crearCursoNuevo(idcurso, nombrecurso, fechaclase) {
-        let resultadoCargaNombrecurso
-        let resultadoCargaFechaclase
+    async crearCursoNuevo(cursoNuevo) {
+        let resultadoCarga
         let resultado
     
         try {
             const db = await this.client.getDb()
-            resultadoCargaNombrecurso = await db.insert({'idcurso':idcurso, 'nombrecurso':nombrecurso}).into('curso')
-            resultadoCargaFechaclase = await db.insert({'idcurso':idcurso, 'fechaclase':fechaclase}).into('horarioscurso')
+            resultadoCarga= await db.insert({'idcurso':cursoNuevo.idcurso, 'nombrecurso':cursoNuevo.nombrecurso}).into('curso')
+            await db.insert({'idcurso':cursoNuevo.idcurso, 'fechaclase':cursoNuevo.fechaclase}).into('horarioscurso')
         }
         catch(error) {
         
@@ -291,7 +290,7 @@ class CoordinadorDaoDb extends CoordinadorDao {
         
         }
         
-        return resultadoCargaNombrecurso 
+        return resultadoCarga
     }
 
 

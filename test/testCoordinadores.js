@@ -6,7 +6,7 @@ import DbClientFactory from "../src/server/db/DbClientFactory.js"
 async function testbuscarTodos(cli){
     console.log("\nCorriendo test:  Obtener todos los todos los coordinadores")
     let rta = await cli.buscarTodos()
-    console.log(rta)
+    //console.log(rta)
 
     if (rta.estado) {
         console.log("Test falla con error: ", rta.descripcion)
@@ -23,19 +23,19 @@ async function testAgregarCoordinador(cli){
     console.log("\nCorriendo test:  Agregar un coordinador")
 
     let dato =   {   
-        dni: 12555667,    
+        dni: 12555679,    
         direccion: 'CALLAO2048', 
         telefono: '1132324349',
         email: 'GUIDO2@CACERES',
         nombre: 'GUIDO2',
         apellido: 'CACERES',
-        legajo: 199797,
+        legajo: 19909,
     }
     
     let rta
     rta = await cli.crearCoordinador(dato)
 
-    //console.log(rta)
+    console.log(rta)
         
     if (rta.estado) {
         console.log("Test falla con error: ", rta.descripcion)
@@ -50,7 +50,7 @@ async function testAgregarCoordinador(cli){
 
 async function testObtenerPorDniCoordinador(cli){
     console.log("\nCorriendo test:  Buscar coordinador por dni")
-    let rta = await cli.buscarPorParametros({ dni: 12555666 })
+    let rta = await cli.buscarPorParametros({ dni: 55000003 })
 
     console.log(rta)
        
@@ -68,16 +68,16 @@ async function testModificarDatosPorDniCoordinador(cli){
     console.log("\nCorriendo test:  Modificar datos de un coordinador")
 
     let datoNuevo =   {   
-        dni: 12555666,    
+        dni: 12555676,    
         direccion: 'UNACALLENUEVA', 
         telefono: '666666',
         email: 'UN@MAILNUEVO',
         nombre: 'UNNOMBRENUEVO2',
         apellido: 'UNAPELLIDONUEVO2',
-        legajo: 878787,
+        legajo: 878777,
     }
 
-    let rta = await cli.reemplazar(datoNuevo, 12555666)
+    let rta = await cli.reemplazar(datoNuevo, 12555660)
      
     console.log(rta)
     
@@ -93,7 +93,7 @@ async function testModificarDatosPorDniCoordinador(cli){
 async function testEliminarCoordinador(cli){ 
     console.log("\nCorriendo test:  Eliminar un coordinador")
     
-    let rta = await cli.eliminarCoordinador(199792)
+    let rta = await cli.eliminarCoordinador(199790)
     console.log(rta)
 
     if (rta.error) {
@@ -111,7 +111,7 @@ async function testAsignarCursoAlumnoComoCoordinador(cli) {
     console.log("\nCorriendo test:  Asignar curso a Alumno como coordinador")
     
     let dni = 112233
-    let curso = 110
+    let curso = 911
 
     let rta = await cli.asignarCursoAlumnoComoCoordinador(curso,dni)
     //console.log(rta)
@@ -129,12 +129,13 @@ async function testAsignarCursoAlumnoComoCoordinador(cli) {
 async function testCrearCursoNuevo(cli){
     console.log("\nCorriendo test:  Crear curso nuevo como coordinador")
     
-    let idcurso = 311
-    let nombrecurso = 'Ingles Tecnico'
-    let fechaclase = '2020-07-3 15:30:00'
+    let datoCurso =   {   
+        idcurso: 284,
+        nombrecurso: 'Ingles Tecnico 123',
+        fechaclase: '2020-08-3 15:30:00',
+    }
 
-
-    let rta = await cli.crearCursoNuevo(idcurso,nombrecurso,fechaclase)
+    let rta = await cli.crearCursoNuevo(datoCurso)
     //console.log(rta)
 
     if (rta.error) {
@@ -149,8 +150,8 @@ async function testCrearCursoNuevo(cli){
 async function testListarProfesorConHorariosComoCoordinador(cli) {
     console.log("\nCorriendo test: Buscar horarios de un profesor como coordinador")
 
-    let rta = await cli.buscarProfesorPorLegajo(1700)
-    //console.log(rta)
+    let rta = await cli.buscarProfesorPorLegajo(1000)
+    console.log(rta)
 
     if (rta.error) {
         console.log("Test falla con error: ", rta.msg)

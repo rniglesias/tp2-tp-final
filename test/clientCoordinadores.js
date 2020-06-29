@@ -7,39 +7,6 @@ class Cliente {
         this.serverUrl = `${ipServidor}:${puerto}/api/coordinador`
     }
 
-    async crearCoordinador(coordinador) {
-        const postOpt = {
-            method: 'POST',
-            uri: this.serverUrl,
-            json: true
-        }
-        if (coordinador) {
-            postOpt.body = coordinador
-        }
-
-        const cliDTO = await request(postOpt)
-        return cliDTO
-    }
-
-    async borrarCoordinador(dni) {
-        await request({
-            method: 'DELETE',
-            uri: this.serverUrl + '/' + dni,
-            json: true
-        })
-    }
-
-    async eliminarCoordinador(legajo){
-
-        const options = {
-            method: 'DELETE',
-            uri: this.serverUrl + '/' + legajo,
-            json: true
-        }
-
-        return await request(options)
-    }
-
     async buscarTodos() {
         const cliDTOs = await request({
             method: 'GET',
@@ -67,14 +34,49 @@ class Cliente {
         })
         return cliDTOs
     }
-//nuevo
-    async buscarTodosLosProfes() {
-        const cliDTOs = await request({
-            method: 'GET',
+
+    async crearCoordinador(coordinador) {
+        const postOpt = {
+            method: 'POST',
             uri: this.serverUrl,
             json: true
+        }
+        if (coordinador) {
+            postOpt.body = coordinador
+        }
+
+        const cliDTO = await request(postOpt)
+        return cliDTO
+    }
+
+    async crearCursoNuevo(cursoNuevo) {
+        const cliDTO = await request({
+            method: 'POST',
+            uri: this.serverUrl + '/cursonuevo/',
+            body: cursoNuevo,
+            json: true
         })
-        return cliDTOs
+        
+        return cliDTO
+    }
+
+    async borrarCoordinador(dni) {
+        await request({
+            method: 'DELETE',
+            uri: this.serverUrl + '/' + dni,
+            json: true
+        })
+    }
+
+    async eliminarCoordinador(legajo){
+
+        const options = {
+            method: 'DELETE',
+            uri: this.serverUrl + '/' + legajo,
+            json: true
+        }
+
+        return await request(options)
     }
 
     async reemplazar(nuevocoordi) {
@@ -87,7 +89,6 @@ class Cliente {
         return cliDTO
     }
 
-
     async asignarCursoAlumnoComoCoordinador(curso, dni) {
         const cliDTO = await request({
             method: 'PUT',
@@ -96,32 +97,7 @@ class Cliente {
             json: true
         })
         return cliDTO
-    }
-      
-    async crearCursoNuevo(idcurso,nombrecurso,fechaclase) {
-        const cliDTO = await request({
-            method: 'POST',
-            uri: this.serverUrl + '/cursonuevo/',
-            body: {idcurso, nombrecurso, fechaclase},
-            json: true
-        })
-        
-        return cliDTO
-    }
-
-/*
-    async eliminarCursoDeCoordinador(curso, legajo){
-
-        const options = {
-            method: 'DELETE',
-            uri: this.serverUrl + '/' + curso + '/' + legajo,
-            json: true
-        }
-        return await request(options)
-    }
-
-    
-    */    
+    }  
 
 }
 
