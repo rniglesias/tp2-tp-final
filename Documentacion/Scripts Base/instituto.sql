@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2020 a las 18:06:13
+-- Tiempo de generación: 30-06-2020 a las 04:32:57
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -38,11 +38,12 @@ CREATE TABLE `curso` (
 
 INSERT INTO `curso` (`idcurso`, `nombrecurso`) VALUES
 (100, 'Ingles Basico A'),
-(110, '* TRIAL * TRIAL'),
-(120, '* TRIAL * TRIAL'),
+(110, 'Ingles Basico B'),
+(120, 'Ingles Basico C'),
 (200, 'Ingles Intermedio A'),
-(210, '* TRIAL * TRIAL * T'),
-(300, 'Ingles Avanzado');
+(210, 'Ingles Intermedio B'),
+(300, 'Ingles Avanzado'),
+(311, 'Ingles Tecnico');
 
 -- --------------------------------------------------------
 
@@ -64,20 +65,22 @@ CREATE TABLE `datoscontacto` (
 --
 
 INSERT INTO `datoscontacto` (`dni`, `direccion`, `telefono`, `email`, `nombre`, `apellido`) VALUES
-(112233, 'Tucuman 661', '* TRIAL ', 'riglesias@bancocredicoop.coop', 'RIBANCO', 'APBanco'),
-(29004601, 'Padilla 629', '1567310879', 'rniglesias@gmail.com', 'Rodrigo', 'Iglesias'),
-(30307686, 'Alberdi 140', '11223344', 'giglesias4@yahoo.com.ar', 'Gonzalo', 'Iglesias'),
+(112233, 'Tucuman 661', '45901699', 'riglesias@bancocredicoop.coop', 'RIBANCO', 'APBanco'),
+(12555667, 'CALLAO2048', '1132324349', 'GUIDO2@CACERES', 'GUIDO2', 'CACERES'),
+(29004601, 'Padilla 629', '1567310879', 'rn@iglesias.com', 'Rodrigo', 'Iglesias'),
+(30307686, 'Alberdi 140', '11223344', 'giglesias@gmail', 'Gonzalo', 'Iglesias'),
 (31000002, 'Diaz Velez 1234', '1152223434', 'carlos@mail.com', 'Juan', 'Castro'),
 (31000003, 'Carabobo 1234', '1151113434', 'carlos@mail.com', 'Raul', 'Garcia'),
 (31000125, 'Caracas 1234', '1151444434', 'jlian@mail.com', 'Julian', 'Garcia'),
-(55000001, 'Alsina 800', '123456', 'r@yanez', 'Roberto', 'Yanez'),
-(55000002, '* TRIAL * T', '4453245', '* TRIAL * ', 'Luz', 'Martinez'),
-(55000003, '* TRIAL *', '43526525', 'a@alvarez', 'Ariadna', 'Alvarez'),
+(43104262, 'calle 23 445', '43344433', 'a@riel', 'Ariel', 'Mendez'),
+(55000001, 'calle 99 567', '123456', 'r@yanez', 'Roberto', 'Yanez'),
+(55000002, 'Acevedo 230', '4453245', 'un@email', 'Luz', 'Martinez'),
+(55000003, 'Oyola 243', '43526525', 'a@alvarez', 'Ariadna', 'Alvarez'),
 (55000004, 'Camargo 342', '65354353', 'm@perez', 'Marcela', 'Perez'),
-(55000005, '* TRIAL * T', '34435435', 'j@lopez', 'Juan', 'Lopez'),
-(55000006, 'Corrientes 5433', '* TRIAL ', 'j@diaz', 'Julieta', 'Diaz'),
-(55000007, 'Murillo 666', '54334354', 'e@rodriguez', 'Ernesto', '* TRIAL *'),
-(55000008, 'Julian Alvarez 323', '24454446', 'f@lopez', 'Ferlando', 'Lopez');
+(55000005, 'Malabia 126', '34435435', 'j@lopez', 'Juan', 'Lopez'),
+(55000006, 'Corrientes 5433', '54353345', 'j@diaz', 'Julieta', 'Diaz'),
+(55000007, 'Murillo 666', '453535245', 'e@rodriguez', 'Ernesto', 'Rodriguez'),
+(55000008, 'Emilio Castro 223', '24454446', 'f@lopez', 'Fernando', 'Lopez');
 
 -- --------------------------------------------------------
 
@@ -97,13 +100,14 @@ CREATE TABLE `empleados` (
 
 INSERT INTO `empleados` (`dni`, `legajo`, `tipoempleado`) VALUES
 (55000001, 1000, 'Profesor'),
-(55000004, 1500, '* TRIAL '),
+(55000004, 1500, 'Profesor'),
 (55000005, 1700, 'Profesor'),
 (55000008, 1800, 'Profesor'),
 (55000002, 2000, 'Administrativo'),
 (55000006, 2200, 'Administrador'),
-(55000003, 3000, '* TRIAL * T'),
-(55000007, 3500, 'Coordinador');
+(55000003, 3000, 'Coordinador'),
+(55000007, 3500, 'Coordinador'),
+(12555667, 199797, 'Coordinador');
 
 -- --------------------------------------------------------
 
@@ -121,6 +125,7 @@ CREATE TABLE `empleadoslegajos` (
 --
 
 INSERT INTO `empleadoslegajos` (`dni`, `legajo`) VALUES
+(12555667, 199797),
 (55000001, 1000),
 (55000002, 2000),
 (55000003, 3000),
@@ -146,12 +151,13 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`dni`, `idcurso`) VALUES
-(112233, NULL),
+(30307686, NULL),
 (31000002, NULL),
+(31000003, NULL),
 (31000125, NULL),
-(30307686, 100),
-(31000003, 110),
-(29004601, 120);
+(43104262, NULL),
+(112233, 110),
+(29004601, 200);
 
 -- --------------------------------------------------------
 
@@ -174,7 +180,8 @@ INSERT INTO `horarioscurso` (`idcurso`, `fechaclase`) VALUES
 (100, '2020-06-30 16:00:00'),
 (200, '2020-06-19 00:00:00'),
 (210, '2020-06-22 00:00:00'),
-(210, '2020-06-30 00:00:00');
+(210, '2020-06-30 00:00:00'),
+(311, '2020-07-03 15:30:00');
 
 -- --------------------------------------------------------
 
@@ -192,11 +199,11 @@ CREATE TABLE `nivel` (
 --
 
 INSERT INTO `nivel` (`idcurso`, `dificultad`) VALUES
-(100, '* TRIAL *'),
-(110, '* TRIAL *'),
+(100, 'BASICO'),
+(110, 'BASICO'),
 (120, 'BASICO'),
-(200, '* TRIAL *'),
-(210, '* TRIAL *'),
+(200, 'MEDIO'),
+(210, 'MEDIO'),
 (300, 'AVANZADO');
 
 -- --------------------------------------------------------
@@ -221,6 +228,20 @@ INSERT INTO `profesorescursos` (`legajo`, `idcurso`) VALUES
 (1700, 120),
 (1700, 200),
 (1800, 210);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sysdiagrams`
+--
+
+CREATE TABLE `sysdiagrams` (
+  `name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `principal_id` int(11) NOT NULL,
+  `diagram_id` int(11) NOT NULL,
+  `version` int(11) DEFAULT NULL,
+  `definition` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -276,6 +297,24 @@ ALTER TABLE `nivel`
 ALTER TABLE `profesorescursos`
   ADD PRIMARY KEY (`legajo`,`idcurso`),
   ADD KEY `fk_profesorescursos_curso` (`idcurso`);
+
+--
+-- Indices de la tabla `sysdiagrams`
+--
+ALTER TABLE `sysdiagrams`
+  ADD PRIMARY KEY (`diagram_id`),
+  ADD UNIQUE KEY `uk_principal_name` (`principal_id`,`name`),
+  ADD KEY `ix_tmp_autoinc` (`diagram_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `sysdiagrams`
+--
+ALTER TABLE `sysdiagrams`
+  MODIFY `diagram_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
