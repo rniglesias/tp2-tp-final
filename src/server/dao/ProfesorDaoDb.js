@@ -1,6 +1,6 @@
 import ProfesorDao from './ProfesorDao.js'
 import DbClientFactory from '../db/DbClientFactory.js'
-//import { where } from 'underscore'
+
 
 
 class ProfesorDaoDb extends ProfesorDao {
@@ -48,20 +48,19 @@ class ProfesorDaoDb extends ProfesorDao {
     }
 
     async leerTodosProfesor() {  
-        let listaProfes = []  
+        let listaProfes 
         try {  
             const db = await this.client.getDb()
-            listaProfes = await this.db.client.select().from('empleados')
-            .innerJoin('empleadoslegajos', 'empleadoslegajos.legajo', 'empleados.legajo')
-            .innerJoin('datoscontacto', 'datoscontacto.dni', 'empleadoslegajos.dni')
-            .where('empleados.tipoempleado', '=' , 'Profesor')
+            listaProfes = await db.select().from('datoscontacto')
+            .innerJoin('empleados', 'empleados.dni', 'datoscontacto.dni')
+            .where('empleados.tipoempleado', '=', 'Profesor')
             if(listaProfes.length == 0){
                 resultado = {
                     "error": 400,
                     "msg": "No hay profesores cargados"
                 }
             }
-    
+            //return listaProfes
         }
         catch(error) {
             resultado = {

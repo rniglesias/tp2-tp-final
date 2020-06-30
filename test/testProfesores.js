@@ -146,6 +146,7 @@ async function testEliminarCursoDeProfesor(cli) {
     let curso = 100
 
     let rta = await cli.eliminarCursoDeProfesor(curso, legajo)
+    //console.log(rta)
 
     if (rta.error) {
         console.log("Test falla con error: ", rta.msg)

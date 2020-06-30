@@ -43,7 +43,6 @@ function getProfesorRouter() {
         let resultadoEliminar
         try {
             resultadoEliminar = await profesorApi.borrar(req.params.legajo)
-            //res.status(204).send(resultadoEliminar)
             res.json(resultadoEliminar)
         } catch (err) {
             res.status(err.estado).json(err)
@@ -61,8 +60,6 @@ function getProfesorRouter() {
     })
 
     router.put('/cursoaprofesor/', async (req, res) => {
-        //res.send("agregar el curso " + req.body.curso + " al profesor " + req.body.legajo)
-
         let resultadoAsignarCurso
         try {
             resultadoAsignarCurso = await profesorApi.asignarCursoAProfesor(req.body.curso, req.body.legajo)

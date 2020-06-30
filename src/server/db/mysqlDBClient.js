@@ -23,7 +23,7 @@ class MysqlDBClient extends DbClient {
     async connect() {
         try {
             this.client.raw('select 1+1 as result').then(function () {
-                // there is a valid connection in the pool
+                // Esto significa que hay una conexion valida
               });
             this.connected = true;
         } catch (error) {
