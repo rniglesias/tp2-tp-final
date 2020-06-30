@@ -82,10 +82,11 @@ function getAlumnoRouter() {
         
         const datos = req.body
         try {
-            const alumnoConCurso = await alumnoApi.modificarCursoAlumno(datos)
-            res.json(alumnoConCurso)
+            await alumnoApi.modificarCursoAlumno(datos)
+            res.json(datos)
         }
         catch (err) {
+            console.log(err)
             res.send(err)
         }
 

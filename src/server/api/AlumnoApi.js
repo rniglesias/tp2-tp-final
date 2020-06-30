@@ -77,11 +77,8 @@ class AlumnoApi {
 
     async modificarCursoAlumno(datos){
         try{
-            await this.buscarAlumno(datos.dni)
-            await this.buscarCurso(datos.idCurso)
             await this.alumnosDao.modificarCursoAlumno(datos)
-            const alumno = await this.buscarAlumno(datos.dni)
-            return alumno
+            return datos
         }
         catch(err){
             if(!(err instanceof CustomError)){
@@ -95,8 +92,7 @@ class AlumnoApi {
         try{
             await this.buscarAlumno(alumno.dni)
             await this.alumnosDao.modificarAlumno(alumno)
-            const alumnoModificado = await this.buscarAlumno(alumno.dni)
-            return alumnoModificado
+            return alumno
         }
         catch(err){
             throw new CustomError(400, 'Error al modificar alumno', err)

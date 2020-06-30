@@ -92,27 +92,19 @@ class AlumnoDaoDb extends AlumnoDao {
             await db.update(datos).from('estudiante').where('estudiante.dni', '=', datos.dni)
         }
         catch(err){
-            throw new CustomError(400, 'Error al agregar el alumno al curso', err)
+            if(err.sqlMessage){
+                throw new CustomError(400, 'No hay ningún curso con el Id informado', err.sqlMessage)    
+            }
+            else{
+                throw new CustomError(400, 'No hay ningún alumno con el dni informado', '')
+            }
         }       
     }
 
     async modificarAlumno(alumno){
-        let alumnoDatos = {
-            dni: alumno.dni,
-            idCurso: alumno.idCurso
-        }
-        let datosContactoDatos = {
-            dni: alumno.dni,    
-            direccion: alumno.direccion, 
-            telefono: alumno.telefono,
-            email: alumno.email,
-            nombre: alumno.nombre,
-            apellido: alumno.apellido
-        }
         try{
             const db = await this.client.getDb()
-            await db.update(datosContactoDatos).from('datoscontacto').where('datoscontacto.dni', '=', alumno.dni)
-            await db.update(alumnoDatos).from('estudiante').where('estudiante.dni', '=', alumno.dni)            
+            await db.update(alumno).from('datoscontacto').where('datoscontacto.dni', '=', alumno.dni)
         }
         catch(err){
             throw new CustomError(400, 'Error al modificar al alumno', err)
@@ -126,14 +118,7 @@ class AlumnoDaoDb extends AlumnoDao {
             .join('estudiante', 'estudiante.idcurso', 'curso.idcurso')
             .join('nivel', 'nivel.idcurso', 'curso.idcurso')
             .join('profesorescursos', 'profesorescursos.idcurso', 'curso.idcurso')
-/*             .join('empleadoslegajos', 'empleadoslegajos.legajo', 'profesorescursos.legajo' ) */
             .where('estudiante.dni', '=', dni)
-/*             const datosCursoCompleto = {
-                idCurso: datosCurso.idcurso,
-                NombreCurso: datosCurso.nombrecurso,
-                Dificultad: datosCurso.dificutlad
-            }
-            console.log(datosCursoCompleto) */
             return datosCurso
         }
         catch(err){

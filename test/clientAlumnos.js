@@ -61,7 +61,7 @@ class Cliente {
             json: true
         }
         
-        return await request(options)
+        return await request(options)     
     }
     
     async eliminarAlumno(dni){

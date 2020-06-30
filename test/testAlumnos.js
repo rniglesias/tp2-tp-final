@@ -91,23 +91,23 @@ async function testObtenerDatosCursoPorAlumno(cli){
 }
 
 async function testModificarCursoAlumno(cli){  
-    let dni = 31000002
-    let idCurso = 100
+    let dni = 112233
+    let idCurso = 120
     console.log("\nAgregar curso a un alumno:")  
         
-    let alumno = await cli.modificarCursoAlumno(dni,idCurso)
-    console.log(util.inspect(alumno, {showHidden: false, depth: null, colors: true}))
+    let alumnoCurso = await cli.modificarCursoAlumno(dni,idCurso)
+    console.log(util.inspect(alumnoCurso, {showHidden: false, depth: null, colors: true}))
+    console.log("\n")
 }
 
 async function testModificarAlumno(cli){  
     let datosParaModificar =   {   
         dni: 31000125,    
-        direccion: 'Caracas 1236', 
+        direccion: 'Caracas 1238', 
         telefono: '1151444435',
         email: 'jlian@mail.com',
         nombre: 'Julian',
         apellido: 'Garcia',
-        idCurso: 100
     }
     console.log("\Modificar datos de un alumno:")  
         
