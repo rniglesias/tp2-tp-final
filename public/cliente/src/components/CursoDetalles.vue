@@ -14,15 +14,16 @@
       <hr />
       <br />
 
-        <h1>Detalles del curso:  {{nombreCurso}}</h1>
-        <h2>Id del curso:  {{idCurso}}</h2>
+        <h4>Detalles del curso:  {{nombreCurso}}</h4>
+        <h4>Id del curso:  {{idCurso}}</h4>
 
         <hr>
         <br>
     
 
-        <h4> Alumnos </h4>
-
+        <h4> Alumnos Inscriptos y Calificaciones </h4>
+        
+        <br>
         <div v-if="this.arrayAlumnos.length">
             <table class="table">
               <tr class="titulo">
@@ -73,7 +74,10 @@
                 El curso no tiene alumnos asignados
           </div>
 
-        <h4> Horarios (hay que poner un filtro acá para que se vean lindos)</h4>
+        <br>
+        <hr>
+        <h4> Clases</h4>
+        <br>
 
         <div v-if="this.arrayClases.length">
             <table class="table">
@@ -82,7 +86,7 @@
                 
               </tr>
               <tr v-for="(fecha,index) in this.arrayClases" :key="index" :class="cssEvento(index)">
-                <td>{{ fecha.fechaclase }}</td>
+                <td>{{ fecha.fechaclase | formatearFecha }}</td>
                                
               </tr>
             </table>
@@ -91,7 +95,10 @@
                 El curso no tiene clases asignadas
           </div>
         
+        <br>
+        <hr>
         <h4> Temario </h4>
+        <br>
 
         <div v-if="this.arrayTemas.length">
             <table class="table">
@@ -110,33 +117,43 @@
           </div>
 
         <hr>
-        Backend en:
-        {{this.$store.state.urlBackend}}
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+          <div class="container text-center">
+            <a class="btn btn-block btn-social btn-twitter">
+              <img src="../../public/Twitter.png" width="40" height="40" border="2" hspace="4" />
+              <img src="../../public/Gmail.png" width="40" height="40" border="2" hspace="4" />
+              <img src="../../public/Facebook.png" width="40" height="40" border="2" hspace="4" />
+            </a>
+            <small>Copyright &copy; Your Website</small>
+          </div>
+        </footer>
         
         
     </div>
 
     <div v-else  class="jumbotron mt-3" style=" transition-delay: 0.3s;">
         
-        <NavbarProfesor 
+                <NavbarProfesor 
               :dni="this.dniProfesor" 
               :legajo="this.legajo"
               @estadoButtonNav="mostrarCont($event)"
         />
 
-        <img src="../../public/logoInstituto.png" width="300" height="100" />
-        <img src="../../public/images1.jpg" width="300" height="100" align="right" />
-        <hr />
-        <br />
+      <img src="../../public/logoInstituto.png" width="300" height="100" />
+      <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+      <hr />
+      <br />
 
-        <h1>Detalles del curso:  {{nombreCurso}}</h1>
-        <h2>Id del curso:  {{idCurso}}</h2>
+        <h4>Detalles del curso:  {{nombreCurso}}</h4>
+        <h4>Id del curso:  {{idCurso}}</h4>
 
         <hr>
         <br>
+    
 
-        <h4> Alumnos </h4>
-
+        <h4> Alumnos Inscriptos y Calificaciones </h4>
+        
+        <br>
         <div v-if="this.arrayAlumnos.length">
             <table class="table">
               <tr class="titulo">
@@ -187,7 +204,10 @@
                 El curso no tiene alumnos asignados
           </div>
 
-        <h4> Horarios (hay que poner un filtro acá para que se vean lindos)</h4>
+        <br>
+        <hr>
+        <h4> Clases</h4>
+        <br>
 
         <div v-if="this.arrayClases.length">
             <table class="table">
@@ -196,7 +216,7 @@
                 
               </tr>
               <tr v-for="(fecha,index) in this.arrayClases" :key="index" :class="cssEvento(index)">
-                <td>{{ fecha.fechaclase }}</td>
+                <td>{{ fecha.fechaclase | formatearFecha }}</td>
                                
               </tr>
             </table>
@@ -205,7 +225,10 @@
                 El curso no tiene clases asignadas
           </div>
         
+        <br>
+        <hr>
         <h4> Temario </h4>
+        <br>
 
         <div v-if="this.arrayTemas.length">
             <table class="table">
@@ -224,8 +247,16 @@
           </div>
 
         <hr>
-        Backend en:
-        {{this.$store.state.urlBackend}}
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+          <div class="container text-center">
+            <a class="btn btn-block btn-social btn-twitter">
+              <img src="../../public/Twitter.png" width="40" height="40" border="2" hspace="4" />
+              <img src="../../public/Gmail.png" width="40" height="40" border="2" hspace="4" />
+              <img src="../../public/Facebook.png" width="40" height="40" border="2" hspace="4" />
+            </a>
+            <small>Copyright &copy; Your Website</small>
+          </div>
+        </footer>
 
 
     </div>

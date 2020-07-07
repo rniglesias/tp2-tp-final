@@ -38,8 +38,16 @@
         <br>
 
         <hr>
-        Backend en:
-        {{this.$store.state.urlBackend}}
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+            <div class="container text-center">
+              <a class="btn btn-block btn-social btn-twitter">
+                <img src="../../public/Twitter.png" width="40" height="40" border="2" hspace="4" />
+                <img src="../../public/Gmail.png" width="40" height="40" border="2" hspace="4" />
+                <img src="../../public/Facebook.png" width="40" height="40" border="2" hspace="4" />
+              </a>
+              <small>Copyright &copy; Your Website</small>
+            </div>
+        </footer>
     </div>
 
     <div v-else  class="jumbotron mt-3" style=" transition-delay: 0.3s;">
@@ -78,8 +86,16 @@
         <br>
 
         <hr>
-        Backend en:
-        {{this.$store.state.urlBackend}}
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+            <div class="container text-center">
+              <a class="btn btn-block btn-social btn-twitter">
+                <img src="../../public/Twitter.png" width="40" height="40" border="2" hspace="4" />
+                <img src="../../public/Gmail.png" width="40" height="40" border="2" hspace="4" />
+                <img src="../../public/Facebook.png" width="40" height="40" border="2" hspace="4" />
+              </a>
+              <small>Copyright &copy; Your Website</small>
+            </div>
+        </footer>
     </div>
   </section>
 

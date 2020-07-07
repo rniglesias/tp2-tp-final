@@ -1,7 +1,6 @@
 <template>
   <section class="src-components-profesor">
     <div v-if="estadoButton == true " class="jumbotron mt-3" style=" margin-left: 16.5%;">
-      
       <NavbarProfesor
         :dni="this.dni"
         :legajo="this.getMyLegajo"
@@ -12,6 +11,14 @@
       <img src="../../public/images1.jpg" width="300" height="100" align="right" />
       <hr />
       <br />
+
+      <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
+      <hr />
+
+      Este es el Portal de Profesores, desde la barra lateral podrás gestionar tus cursos, calificar a tus
+      estudiantes, visualizar tus próximas clases o realizar cambios en tu perfil desde el menú de opciones
+
+      <hr>
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -68,9 +75,34 @@
         </a>
       </div>
 
+      <hr>
+           
+      <h4>Lista de todos los profesores del Instituto (estos son tus compañeros)</h4>
+
+      <div v-if="this.getArrayProfesores.length">
+        <table class="table">
+          <tr class="titulo">
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+          </tr>
+          <tr
+            v-for="(profesor,index) in this.getArrayProfesores"
+            :key="index"
+            :class="cssEvento(index)"
+          >
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.apellido }}</td>
+            <td>{{ profesor.email }}</td>
+          </tr>
+        </table>
+      </div>
+      <div v-else class="alert alert-danger">No se encontraron profesores</div>
+
       <br />
       <br />
       <br />
+      <hr>
 
       <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
@@ -83,43 +115,9 @@
         </div>
       </footer>
 
-      <hr />
-      <br />Poner algún detalle del profesor, alguna descripción o algo de relevancia...
-      <br />
-      <br />
-      <br />
-
-      <h4>Lista de todos los profesores del Instituto (solo para probar y mostrar algun dato)</h4>
-
-      <div v-if="this.getArrayProfesores.length">
-        <table class="table">
-          <tr class="titulo">
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Legajo</th>
-            <th>Email</th>
-          </tr>
-          <tr
-            v-for="(profesor,index) in this.getArrayProfesores"
-            :key="index"
-            :class="cssEvento(index)"
-          >
-            <td>{{ profesor.dni }}</td>
-            <td>{{ profesor.nombre }}</td>
-            <td>{{ profesor.apellido }}</td>
-            <td>{{ profesor.legajo }}</td>
-            <td>{{ profesor.email }}</td>
-          </tr>
-        </table>
-      </div>
-      <div v-else class="alert alert-danger">No se encontraron profesores</div>
     </div>
 
     <div v-else class="jumbotron mt-3" style=" transition-delay: 0.3s;">
-      <h1>Profesor: {{dni}}</h1>
-      <h2>Legajo: {{this.getMyLegajo}}</h2>
-
       <NavbarProfesor
         :dni="this.dni"
         :legajo="this.getMyLegajo"
@@ -130,6 +128,14 @@
       <img src="../../public/images1.jpg" width="300" height="100" align="right" />
       <hr />
       <br />
+
+      <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
+      <hr />
+
+      Este es el Portal de Profesores, desde la barra lateral podrás gestionar tus cursos, calificar a tus
+      estudiantes, visualizar tus próximas clases o realizar cambios en tu perfil desde el menú de opciones
+
+      <hr>
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -186,9 +192,34 @@
         </a>
       </div>
 
+      <hr>
+           
+      <h4>Lista de todos los profesores del Instituto (estos son tus compañeros)</h4>
+
+      <div v-if="this.getArrayProfesores.length">
+        <table class="table">
+          <tr class="titulo">
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+          </tr>
+          <tr
+            v-for="(profesor,index) in this.getArrayProfesores"
+            :key="index"
+            :class="cssEvento(index)"
+          >
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.apellido }}</td>
+            <td>{{ profesor.email }}</td>
+          </tr>
+        </table>
+      </div>
+      <div v-else class="alert alert-danger">No se encontraron profesores</div>
+
       <br />
       <br />
       <br />
+      <hr>
 
       <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
@@ -201,37 +232,6 @@
         </div>
       </footer>
 
-      <hr />
-      <br />Poner algún detalle del profesor, alguna descripción o algo de relevancia...
-      <br />
-      <br />
-      <br />
-
-      <h4>Lista de todos los profesores del Instituto (solo para probar y mostrar algun dato)</h4>
-
-      <div v-if="this.getArrayProfesores.length">
-        <table class="table">
-          <tr class="titulo">
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Legajo</th>
-            <th>Email</th>
-          </tr>
-          <tr
-            v-for="(profesor,index) in this.getArrayProfesores"
-            :key="index"
-            :class="cssEvento(index)"
-          >
-            <td>{{ profesor.dni }}</td>
-            <td>{{ profesor.nombre }}</td>
-            <td>{{ profesor.apellido }}</td>
-            <td>{{ profesor.legajo }}</td>
-            <td>{{ profesor.email }}</td>
-          </tr>
-        </table>
-      </div>
-      <div v-else class="alert alert-danger">No se encontraron profesores</div>
     </div>
   </section>
 </template>
@@ -248,21 +248,17 @@
     },
     props: ['dni'],
     mounted () {
-      //console.log("Cargo el array...")
       this.$store.dispatch('actionCargarArrayProfesores')
-      //console.log("Resultado:")
-      console.log(this.$store.state.arrayProfesores)
+      //console.log(this.$store.state.arrayProfesores)
 
-      /*
-      this.axios(url+'/api/profesor/')
-      .then(rta => console.log(rta.data))
-      .catch(console.log)
-      */
+      //this.misDatos = this.getMyData()
+
 
     },
     data () {
       return {
-        estadoButton: true
+        estadoButton: true,
+        misDatos: {}
       }
     },
     methods: {
@@ -276,7 +272,9 @@
 
         mostrarCont(estado) {
           this.estadoButton = estado
-        }
+        },
+
+        
 
 
     },
@@ -298,8 +296,21 @@
           }
         });
         return resultado
-      }
+      },
 
+      getMyData() {
+        let resultado
+
+        this.$store.state.arrayProfesores.forEach(profesor => {
+          if ( profesor.dni == this.dni )
+          {
+            resultado = profesor
+          }
+        });
+        return resultado
+      },
+      
+      
       
     }
 }
