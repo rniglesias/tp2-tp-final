@@ -41,6 +41,12 @@ class ProfesorApi {
         return cursos
     }
 
+    async buscarHorarios(legajo) {
+        let horarios
+        horarios = await this.profesorDao.buscarHorariosDeProfesor(legajo)
+        return horarios
+    }
+
     async borrar(legajo) {
         let respuesta = await this.profesorDao.eliminarProfesor(legajo)
         return respuesta

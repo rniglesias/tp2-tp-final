@@ -14,7 +14,18 @@ function getAlumnoRouter() {
             res.json(alumnos)
         }
         catch (err) {
-            let error = new CustomError(400, 'Error al traer el alumno', err)
+            let error = new CustomError(400, 'Error al traer los alumnos', err)
+            res.send(error)
+        }
+    })
+
+    router.get('/notas', async(req, res) => {
+        try {
+            const alumnos = await alumnoApi.listarAlumnosYNotas()
+            res.json(alumnos)
+        }
+        catch (err) {
+            let error = new CustomError(400, 'Error al traer los alumnos', err)
             res.send(error)
         }
     })
@@ -39,6 +50,18 @@ function getAlumnoRouter() {
         }
         catch (err) {
             let error = new CustomError(400, 'Error buscar los datos del curso', err)
+            res.send(error)
+        }
+    })
+
+    router.get('/notas/:dni', async (req, res) => {
+        try {
+            const dni = req.params.dni
+            const notas = await alumnoApi.buscarNotas(dni)
+            res.json(notas)
+        }
+        catch (err) {
+            let error = new CustomError(400, 'Error al buscar las notas del alumno:', err)
             res.send(error)
         }
     })
@@ -76,6 +99,14 @@ function getAlumnoRouter() {
             res.send(err)
         }
 
+    })
+
+    router.post('/actualizarnotas/', async (req, res) => {
+        try {
+            await alumnoApi.actualizarNotas(req.body)
+        } catch (error) {
+            res.send(error)
+        }
     })
 
     router.put('/cursoAlumno/:dni', async (req, res) => {

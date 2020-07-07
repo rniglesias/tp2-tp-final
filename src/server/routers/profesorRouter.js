@@ -39,6 +39,17 @@ function getProfesorRouter() {
 
     })
 
+    router.get('/gethorariosporlegajo/:legajo', async(req,res) => {
+        let resultadoBuscarHorarios
+        try {
+            resultadoBuscarHorarios = await profesorApi.buscarHorarios(req.params.legajo)
+            res.json(resultadoBuscarHorarios)
+        } catch (err) {
+            res.status(err.estado).json(err)
+        }
+
+    })
+
     router.delete('/:legajo', async (req, res) => {
         let resultadoEliminar
         try {

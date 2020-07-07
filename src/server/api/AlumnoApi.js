@@ -50,6 +50,11 @@ class AlumnoApi {
         return alumnos
     }
 
+    async listarAlumnosYNotas(){
+        const alumnos = await this.alumnosDao.listarAlumnosYNotas()
+        return alumnos
+    }
+
     async borrarAlumno(dni){
         try{
             const alumno = await this.buscarAlumno(dni)
@@ -97,6 +102,21 @@ class AlumnoApi {
         catch(err){
             throw new CustomError(400, 'Error al modificar alumno', err)
         }
+    }
+
+    async actualizarNotas(datos) {
+        try {
+            await this.alumnosDao.actualizarNotas(datos)
+        }
+        catch(err){
+            throw new CustomError(400, 'Error al actualizar notas', err)
+        }
+    }
+
+    async buscarNotas(dni) {
+        let notas 
+        notas = await this.alumnosDao.buscarNotas(dni)
+        return notas
     }
 
     static asegurarAlumnoValido(alumno) {

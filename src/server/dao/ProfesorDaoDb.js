@@ -220,7 +220,7 @@ class ProfesorDaoDb extends ProfesorDao {
         let resultado = null
         try {
             const db = await this.client.getDb()
-            resultado = await db.select('NombreCurso').from('Empleados').innerJoin('ProfesoresCursos', 'ProfesoresCursos.legajo', 'Empleados.legajo' )
+            resultado = await db.select().from('Empleados').innerJoin('ProfesoresCursos', 'ProfesoresCursos.legajo', 'Empleados.legajo' )
             .innerJoin('Curso', 'Curso.idCurso', 'ProfesoresCursos.idCurso').where('ProfesoresCursos.legajo', nroLegajo)
     
             if(resultado.length == 0){
@@ -311,6 +311,33 @@ class ProfesorDaoDb extends ProfesorDao {
         return resultado
     }
 
+    async buscarHorariosDeProfesor(nroLegajo){
+        let resultado = null
+        try {
+            const db = await this.client.getDb()
+            resultado = await db.select().from('ProfesoresCursos')
+            .innerJoin('Curso','ProfesoresCursos.idcurso','Curso.idcurso')
+            .innerJoin('HorariosCurso', 'Curso.idcurso', 'HorariosCurso.idcurso')
+            .where('ProfesoresCursos.legajo','=',nroLegajo)
+            .orderBy('fechaclase')
+    
+            if(resultado.length == 0){
+                resultado = {
+                    "error": 400,
+                    "msg": "El profesor no tiene horarios cargados"
+                }
+            }
+        }
+        catch(error) {
+            resultado = {
+                "error": 400,
+                "msg": error
+            }
+            return resultado
+        }
+    
+        return resultado
+    }
 
 }
 

@@ -17,6 +17,8 @@ class AlumnoDaoDb extends AlumnoDao {
             const db = await this.client.getDb()
             resultadoCargaDatos = await db.insert(alumnoNuevo.datosContacto).into('datoscontacto')
             resultadoCargaAlumno = await db.insert({'dni':alumnoNuevo.datosContacto.dni}).into('estudiante')
+            // Agregado para el tp de nt2
+            await db.insert({'dni':alumnoNuevo.datosContacto.dni}).into('estudiantenotas')
             return alumnoNuevo
         }
         catch (err) {
@@ -75,6 +77,19 @@ class AlumnoDaoDb extends AlumnoDao {
         }
     }
 
+    async listarAlumnosYNotas(){
+        try{
+            const db = await this.client.getDb()
+            const alumnos = await db.select().from('estudiante')
+            .join('datoscontacto', 'datoscontacto.dni', 'estudiante.dni')
+            .join('estudiantenotas','estudiantenotas.dni','estudiante.dni')
+            return alumnos
+        }
+        catch(err){
+            throw new CustomError(500, 'Error al buscar los alumnos', err)
+        }
+    }
+
     async borrarAlumno(dni){
         try{
             const db = await this.client.getDb()
@@ -111,6 +126,15 @@ class AlumnoDaoDb extends AlumnoDao {
         }         
     }
 
+    async actualizarNotas(datos) {
+        try {
+                const db = await this.client.getDb()
+                await db.update(datos).from('estudiantenotas').where('estudiantenotas.dni', '=', datos.dni)
+            } catch (error) {
+                throw new CustomError(400, 'Error al actualizar las notas del alumno: ', error)
+            }
+    }
+
     async buscarDatosCurso(dni){
         try{
             const db = await this.client.getDb()
@@ -124,6 +148,28 @@ class AlumnoDaoDb extends AlumnoDao {
         catch(err){
             throw new CustomError(400, 'Error al buscar los datos del curso', err)
         }
+    }
+
+    async buscarNotas(dni) {
+        let notas
+        try {
+            const db = await this.client.getDb()
+            notas = await db.select().from('estudiantenotas')
+            .where('estudiantenotas.dni', '=', dni)
+
+            if(notas.length == 0) {
+               notas = {
+                    "error": 400,
+                    "msg": "El alumno no tiene notas cargadas"
+                }
+            }
+        } catch (error) {
+            notas = {
+                "error": 400,
+                "msg": error
+            }
+        }
+        return notas
     }
 
 }

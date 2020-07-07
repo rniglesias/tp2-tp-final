@@ -217,6 +217,7 @@ async function main() {
         console.log(`passed: ${passed}`)
         console.log(`errors: ${errors}`)
 
+         
         await app.disconnect()
         process.exit(0)
     })

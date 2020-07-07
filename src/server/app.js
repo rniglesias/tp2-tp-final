@@ -1,19 +1,23 @@
 import express from 'express'
 import DbClientFactory from '../server/db/DbClientFactory.js'
 import { getProfesorRouter } from './routers/profesorRouter.js'
+import { getCursoRouter } from './routers/cursoRouter.js'
 import { getAlumnoRouter } from './routers/AlumnoRouter.js'
 import { getCoordinadorRouter } from './routers/coordinadorRouter.js'
+import cors from 'cors'
+
 
 class App {
 
     constructor() {
         const app = express()
+        app.use(cors())
         app.use(express.json())
         app.set('json spaces', 4)
         app.use('/api/profesor', getProfesorRouter())
+        app.use('/api/curso', getCursoRouter())
         app.use('/api/alumno', getAlumnoRouter())
         app.use('/api/coordinador', getCoordinadorRouter())
-        //app.use('/api/administrador', getAdministradorRouter())
         this.app = app
 
         this.dbClient = DbClientFactory.getDbClient()
