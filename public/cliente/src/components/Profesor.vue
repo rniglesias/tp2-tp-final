@@ -12,8 +12,10 @@
       <hr />
       <br />
 
-      <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
-      <hr />
+      <div v-if="this.getMyData">
+        <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
+        <hr />
+      </div>
 
       Este es el Portal de Profesores, desde la barra lateral podrás gestionar tus cursos, calificar a tus
       estudiantes, visualizar tus próximas clases o realizar cambios en tu perfil desde el menú de opciones
@@ -129,8 +131,10 @@
       <hr />
       <br />
 
-      <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
-      <hr />
+      <div v-if="this.getMyData">
+        <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
+        <hr />
+      </div>
 
       Este es el Portal de Profesores, desde la barra lateral podrás gestionar tus cursos, calificar a tus
       estudiantes, visualizar tus próximas clases o realizar cambios en tu perfil desde el menú de opciones

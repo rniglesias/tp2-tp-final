@@ -13,24 +13,29 @@ export default new Vuex.Store({
         arrayCoordinadores: [],
     },
     actions : {
-        actionCargarArrayProfesores({commit})
+        actionCargarArrayProfesores()
         {
-            commit('mutationCargarArrayProfesores')
+            axios(this.state.urlBackend+'/api/profesor/')
+            .then(rta => {
+                this.state.arrayProfesores = rta.data
+            })
+            .catch(error => console.log("Fallo: ", error))
         },
-        actionCargarArrayCoordinadores({commit})
+        actionCargarArrayCoordinadores()
         {
-            commit('mutationCargarArrayCoordinadores')
-        },
+            axios(this.state.urlBackend+'/api/coordinador/')
+            .then(rta => {
+                this.state.arrayCoordinadores = rta.data
+            })
+            .catch(error => console.log("Fallo: ", error))
+        }
 
     },
     mutations : {
 
-
+      // Corregido y ya no se usa esta porque tiene promises
       mutationCargarArrayProfesores(state)
         {
-            //console.log("Cargando los profesores desde: ", state.urlBackend)
-            //console.log(process.env.NODE_ENV)
-            //axios.get(state.urlBackend + '/api/profesor/')
             axios(state.urlBackend+'/api/profesor/')
             .then(rta => {
                 console.log(rta.data)
@@ -40,6 +45,7 @@ export default new Vuex.Store({
             .catch(error => console.log("Fallo: ", error))
         },
 
+        // Corregido y ya no se usa esta porque tiene promises
         mutationCargarArrayCoordinadores(state)
         {
             axios(state.urlBackend+'/api/coordinador/')
