@@ -7,10 +7,11 @@
 
     <br>
     <br>
-    <vue-form :state="formState" @submit.prevent="enviar()">
+   
+        <vue-form :state="formState" @submit.prevent="enviar()">
         <validate tag="div" class="titulo">
           <label for="consulta" class="titulo">Consulta:</label>
-          <input
+          <textarea
             type="text"
             id="consulta"
             class="form-control"
@@ -54,6 +55,9 @@
         Mensaje sin enviar
       </div>
 
+ 
+  
+  
   </section>
 
 </template>
