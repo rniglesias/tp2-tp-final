@@ -237,6 +237,7 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     font-size: 150%;
     width: 150px;
+    text-align: center;
 }
 .square_btn:active {/*on Click*/
     -ms-transform: translateY(4px);
