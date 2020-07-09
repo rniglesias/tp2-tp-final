@@ -9,41 +9,56 @@
                 <ul class="navbar-nav">
                   <li class="nav-item">
                     <router-link :to="`/Profesor/${dni}`">
+                    <!--
                       <button type="button" class="btn btn-dark btn-lg btn-block">
                         <a class="text-light" href="#">Inicio</a>
                       </button>
+                    -->
+                      <a href="#" class="square_btn">Inicio</a>
                     </router-link>
                   </li>
 
                   <li class="nav-item">
                     <router-link :to="`/CursosProfesor/${dni}/${legajo}`">
+                      <!--
                       <button type="button" class="btn btn-dark btn-lg btn-block">
                         <a class="text-light" href="#">Cursos</a>
                       </button>
+                      -->
+                      <a href="#" class="square_btn">Cursos</a>
                     </router-link>
                   </li>
 
                   <li class="nav-item">
                     <router-link :to="`/HorariosProfesor/${dni}/${legajo}`">
+                      <!--
                       <button type="button" class="btn btn-dark btn-lg btn-block">
                         <a class="text-light" href="#">Horarios</a>
                       </button>
+                      -->
+                      <a href="#" class="square_btn">Horarios</a>
                     </router-link>
                   </li>
 
                   <li class="nav-item">
                     <router-link :to="`/OpcionesProfesor/${dni}/${legajo}`">
+                      <!--
                       <button type="button" class="btn btn-dark btn-lg btn-block">
                         <a class="text-light" href="#">Opciones</a>
                       </button>
+                      -->
+                      <a href="#" class="square_btn">Opciones</a>
                     </router-link>
                   </li>
 
                   <li class="nav-item">
                     <router-link to="/" tag="li">
+                      <!--
                       <button type="button" class="btn btn-dark btn-lg btn-block">
                         <a class="text-light" href="#">Salir</a>
                       </button>
+                      -->
+                      <a href="#" class="square_btn">Salir</a>
                     </router-link>
                   </li>
                 </ul>
@@ -212,4 +227,24 @@ height: 32px;
 outline: none;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
+.square_btn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #4160a1;/*Button Color*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 8px;
+    font-size: 150%;
+    width: 150px;
+}
+.square_btn:active {/*on Click*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*Move down*/
+    border-bottom: none;/*disappears*/
+    font-size: 150%;
+}
+
+
 </style>

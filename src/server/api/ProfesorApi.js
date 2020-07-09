@@ -63,6 +63,18 @@ class ProfesorApi {
         return respuesta
     }
 
+    async cargarConsultaParaCoordinador(datos) 
+    {
+        let respuesta = await this.profesorDao.cargarConsultaParaCoordinador(datos)
+        return respuesta
+    }
+
+    async cargarSolicitudActualizacionDatos(datos)
+    {
+        let respuesta = await this.profesorDao.cargarSolicitudActualizacionDatos(datos)
+        return respuesta
+    }
+
     async eliminarCursoDeProfesor(curso, legajo)
     {
         let respuesta = await this.profesorDao.eliminarCursoDeProfesor(curso, legajo)

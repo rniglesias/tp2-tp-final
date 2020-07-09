@@ -14,8 +14,7 @@
         <img src="../../public/images1.jpg" width="300" height="100" align="right">
 
         <hr />
-        <br />
-
+ 
         <h4> Cursos Asignados </h4>
 
         <hr>

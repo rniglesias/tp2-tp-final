@@ -12,8 +12,7 @@
       <img src="../../public/logoInstituto.png" width="300" height="100" />
       <img src="../../public/images1.jpg" width="300" height="100" align="right" />
       <hr />
-      <br />
-
+  
       <div v-if="this.getMyData">
         <h1>Bienvenido, {{this.getMyData.nombre}} {{this.getMyData.apellido}}</h1>
         <hr />

@@ -28,6 +28,17 @@ export default new Vuex.Store({
                 this.state.arrayCoordinadores = rta.data
             })
             .catch(error => console.log("Fallo: ", error))
+        },
+        actionGetProfesor(dni) {
+            let resultado
+
+            this.state.arrayProfesores.forEach(profesor => {
+                    if ( profesor.dni == dni )
+                    {
+                        resultado = profesor
+                    }
+            });
+            return resultado
         }
 
     },

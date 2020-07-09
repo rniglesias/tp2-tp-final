@@ -13,8 +13,7 @@
         <img src="../../public/logoInstituto.png" width="300" height="100" />
         <img src="../../public/images1.jpg" width="300" height="100" align="right" />
         <hr />
-        <br />
-        
+         
 
         <h4> Horarios Por Curso </h4>
         

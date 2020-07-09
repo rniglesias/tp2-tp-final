@@ -339,6 +339,34 @@ class ProfesorDaoDb extends ProfesorDao {
         return resultado
     }
 
+    async cargarConsultaParaCoordinador(datos) {
+        let resultado
+        try {
+            const db = await this.client.getDb()
+            resultado = await db.insert(datos).into('consultasprofesores')
+        } catch (error) {
+            resultado = {
+                "error": 400,
+                "msg": "Error al cargar la consulta del profesor para el coordinador"
+            }
+        }
+        return resultado
+    }
+
+    async cargarSolicitudActualizacionDatos(datos) {
+        let resultado
+        try {
+            const db = await this.client.getDb()
+            resultado = await db.insert(datos).into('actualizardatosprofesor')
+        } catch (error) {
+            resultado = {
+                "error": 400,
+                "msg": "Error al cargar el pedido de actualización de datos"
+            }
+        }
+        return resultado
+    }
+
 }
 
 export default ProfesorDaoDb

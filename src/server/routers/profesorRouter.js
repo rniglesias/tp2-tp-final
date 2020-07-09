@@ -18,6 +18,22 @@ function getProfesorRouter() {
         }
     })
 
+    router.post('/cargarconsultacoordinador/', async (req, res) => {
+        try {
+            await profesorApi.cargarConsultaParaCoordinador(req.body)
+        } catch (error) {
+            res.send(error)
+        }
+    })
+
+    router.post('/cargarsolicitudactualizaciondatos/', async (req, res) => {
+        try {
+            await profesorApi.cargarSolicitudActualizacionDatos(req.body)
+        } catch (error) {
+            res.send(error)
+        }
+    })
+
     router.get('/', async (req, res) => {
         try {
             const queryParams = new Map(Object.entries(req.query))

@@ -13,8 +13,7 @@
       <img src="../../public/logoInstituto.png" width="300" height="100" />
       <img src="../../public/images1.jpg" width="300" height="100" align="right" />
       <hr />
-      <br />
-
+      
         <h4>Detalles del curso:  {{nombreCurso}}</h4>
         <h4>Id del curso:  {{idCurso}}</h4>
 

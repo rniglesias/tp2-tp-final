@@ -9,6 +9,8 @@ import CursoDetalles from "./components/CursoDetalles.vue";
 import OpcionesProfesor from "./components/OpcionesProfesor.vue";
 import HorariosProfesor from "./components/HorariosProfesor.vue";
 import CalificarAlumno from "./components/CalificarAlumno.vue";
+import FormConsultasParaCoordinador from "./components/FormConsultasParaCoordinador.vue"
+import FormCambioDatosProfesor from "./components/FormCambioDatosProfesor.vue"
 
 // Lo de Facu
 import Coordinador from "./components/Coordinador.vue";
@@ -36,7 +38,9 @@ export default new VueRouter({
       {path: '/CursosCoordinador', component: CursosCoordinador, props:true},
       {path: '/AlumnosCoordinador', component: AlumnosCoordinador, props:true},
       {path: '/ProfesoresCoordinador', component: ProfesoresCoordinador, props:true},
-      {path: '/OpcionesCoordinador/:dni/:legajo', component: OpcionesCoordinador, props:true}
+      {path: '/OpcionesCoordinador/:dni/:legajo', component: OpcionesCoordinador, props:true},
+      {path: '/FormConsultasParaCoordinador/:dni/:legajo', component: FormConsultasParaCoordinador, props:true},
+      {path: '/FormCambioDatosProfesor/:dni/:legajo', component: FormCambioDatosProfesor, props:true}
     ]
 })
 

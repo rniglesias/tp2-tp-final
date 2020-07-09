@@ -13,18 +13,13 @@
         <img src="../../public/logoInstituto.png" width="300" height="100" />
         <img src="../../public/images1.jpg" width="300" height="100" align="right" />
         <hr />
-        <br />
         
-        <h1>Profesor:  {{dni}}</h1>
-        <h2>Legajo:  {{legajo}}</h2>
-        <hr>
-
+  
         <h4> Mis Datos Personales </h4>
         <hr>
 
-        <br>
-        <br>
-        Poner acá el formulario de modificación de datos personales
+     
+        <FormCambioDatosProfesor :dni="this.dni" :legajo="this.legajo"/>
         <br>
         <br>
 
@@ -34,7 +29,7 @@
 
         <br>
         <br>
-        Poner acá el cuadro de contacto con el Coordinador
+        <FormConsultasParaCoordinador :dni="this.dni" :legajo="this.legajo"/>
         <br>
         <br>
 
@@ -58,11 +53,15 @@
 <script lang="js">
 
   import NavbarProfesor from "./NavbarProfesor.vue"
+  import FormConsultasParaCoordinador from "./FormConsultasParaCoordinador.vue"
+  import FormCambioDatosProfesor from "./FormCambioDatosProfesor.vue"
 
   export default  {
     name: 'src-components-opciones-profesor',
     components: {
-      NavbarProfesor
+      NavbarProfesor,
+      FormConsultasParaCoordinador,
+      FormCambioDatosProfesor
     },
     props: ['dni', 'legajo'],
     mounted () {
