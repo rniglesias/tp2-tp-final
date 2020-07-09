@@ -35,6 +35,35 @@ class CursoDaoDb extends CursoDao {
         return listaCursos
     }
 
+    async buscarProfesoresCurso(idCurso) {
+        let listaProfesores
+
+        try {
+            const db = await this.client.getDb()
+            listaProfesores = await db.select().from('datoscontacto')
+            .innerJoin('empleados', 'empleados.dni', 'datoscontacto.dni')
+            .innerJoin('profesorescursos','profesorescursos.legajo', 'empleados.legajo')
+            .innerJoin('curso', 'curso.idcurso', 'profesorescursos.idcurso')
+            .where('curso.idcurso', '=', idCurso)
+
+            if(listaProfesores.length == 0){
+                resultado = {
+                    "error": 400,
+                    "msg": "No hay profesores cargados en el curso"
+                }
+                return resultado
+            }
+
+        } catch (error) {
+            resultado = {
+                "error": 400,
+                "msg": error
+            }
+            return resultado
+        }
+        return listaProfesores
+    }
+
     async buscarAlumnosCurso(idCurso) {
         let listaAlumnos
 

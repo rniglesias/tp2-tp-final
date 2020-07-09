@@ -367,6 +367,31 @@ class ProfesorDaoDb extends ProfesorDao {
         return resultado
     }
 
+
+    async buscarTodasConsultas() {
+        let listaConsultas
+
+        try {  
+            const db = await this.client.getDb()
+            listaConsultas = await db.select().from('consultasprofesores')
+            if(listaConsultas.length == 0){
+                resultado = {
+                    "error": 400,
+                    "msg": "No hay consultas cargados"
+                }
+            }
+        }
+        catch(error) {
+            resultado = {
+                "error": 400,
+                "msg": error
+            }
+            return resultado
+        }
+        return listaConsultas
+    }
+
+
 }
 
 export default ProfesorDaoDb

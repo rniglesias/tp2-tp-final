@@ -44,6 +44,15 @@ function getProfesorRouter() {
         }
     })
 
+    router.get('/consultas', async (req, res) => {
+        try {
+            const consultas = await profesorApi.buscarConsultas()
+            res.json(consultas)
+        } catch (err) {
+            res.send(err)
+        }
+    })
+
     router.get('/getcursosporlegajo/:legajo', async(req,res) => {
         let resultadoBuscarCursos
         try {

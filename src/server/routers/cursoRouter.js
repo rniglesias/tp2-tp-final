@@ -8,10 +8,28 @@ function getCursoRouter() {
 
     const cursoApi = new CursoApi()
 
+    router.get('/', async (req, res) => {
+        try {
+            const cursos = await cursoApi.leerTodos()
+            res.json(cursos)
+        } catch (err) {
+            res.send(err)
+        }
+    })
+
     router.get('/:idCurso', async (req, res) => {
         try {
             const alumnos = await cursoApi.buscarAlumnos(req.params.idCurso)
             res.json(alumnos)
+        } catch (err) {
+            res.send(err)
+        }
+    })
+    
+    router.get('/:idCurso/profesores', async (req, res) => {
+        try {
+            const profesores = await cursoApi.buscarProfesores(req.params.idCurso)
+            res.json(profesores)
         } catch (err) {
             res.send(err)
         }

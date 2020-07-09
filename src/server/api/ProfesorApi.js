@@ -68,6 +68,12 @@ class ProfesorApi {
         let respuesta = await this.profesorDao.cargarConsultaParaCoordinador(datos)
         return respuesta
     }
+    
+    async buscarConsultas() 
+    {
+        let respuesta = await this.profesorDao.buscarTodasConsultas()
+        return respuesta
+    }
 
     async cargarSolicitudActualizacionDatos(datos)
     {

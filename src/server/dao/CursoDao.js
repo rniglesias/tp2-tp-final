@@ -7,6 +7,10 @@ class CursoDao {
         throw new CustomError(500, 'falta implementar leerTodosCursos!')
     }
 
+    async buscarProfesoresCurso(idCurso) {
+        throw new CustomError(500, 'falta implementar buscarProfesoresDeCurso!')
+    }
+
     async buscarAlumnosCurso(idCurso) {
         throw new CustomError(500, 'falta implementar buscarAlumnosDeCurso!')
     }

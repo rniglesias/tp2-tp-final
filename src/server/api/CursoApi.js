@@ -8,6 +8,17 @@ class CursoApi {
         this.cursoDao = CursoDaoFactory.getDao()
     }
 
+    async leerTodos(){
+        let cursos
+        cursos = await this.cursoDao.leerTodosCursos()
+        return cursos
+    }
+    
+    async buscarProfesores(idCurso) {
+        let profesores
+        profesores = await this.cursoDao.buscarProfesoresCurso(idCurso)
+        return profesores
+    }
 
     async buscarAlumnos(idCurso) {
         let alumnos

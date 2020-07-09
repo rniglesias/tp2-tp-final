@@ -1,10 +1,10 @@
 <template>
 
   <section class="src-components-alumnos-coordinador">
-    <div>
+    <div class="jumbotron mt-3" :style="cssChequearEstadoButton()">
       <NavbarCoordinador 
             :dni="this.dni" 
-            :legajo="this.getMyLegajo"
+            :legajo="this.legajo"
             @estadoButtonNav="mostrarCont($event)"
             :buttonCoordinador= 0
             :buttonCursosCoordinador= 0
@@ -13,21 +13,19 @@
             :buttonOpcionesCoordinador= 0
           />
           
-
-        
-
-    <div v-if="estadoButton == true " class="jumbotron mt-3" style=" margin-left: 16.5%;">
-    
           <img src="../../public/logoInstituto.png" width="300" height="100">
           <img src="../../public/images1.jpg" width="300" height="100" align="right">
+          
+          <hr />
+          <h4> Alumnos del Instituto </h4>
           <hr>
           <br>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Listar Cursos</a>
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Listar Alumnos</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Alta de Curso</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Alta de Alumno</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Solicitudes</a>
@@ -35,7 +33,7 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <div v-if="this.getArrayCoordinadores.length">
+              <div v-if="this.getArrayProfesores.length">
             <table class="table">
               <tr class="titulo">
                 <th>DNI</th>
@@ -45,12 +43,12 @@
                 <th>Email</th>
 
               </tr>
-              <tr v-for="(coordinador,index) in this.getArrayCoordinadores" :key="index" :class="cssEvento(index)">
-                <td>{{ coordinador.dni }}</td>
-                <td>{{ coordinador.nombre }}</td>
-                <td>{{ coordinador.apellido }}</td>
-                <td>{{ coordinador.legajo }}</td>
-                <td>{{ coordinador.email }}</td>
+              <tr v-for="(profesor,index) in this.getArrayProfesores" :key="index" :class="cssEvento(index)">
+                <td>{{ profesor.dni }}</td>
+                <td>{{ profesor.nombre }}</td>
+                <td>{{ profesor.apellido }}</td>
+                <td>{{ profesor.legajo }}</td>
+                <td>{{ profesor.email }}</td>
               </tr>
             </table>
           </div>
@@ -61,11 +59,13 @@
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               
             <h1>Folmulario Vue</h1>
+
+            <FormAgregarAlumno />
           
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
               
-            <h1>Solicitudes</h1>
+            <h1>Consultas</h1>
           
             </div>
           </div>
@@ -87,79 +87,7 @@
             
    
     </div>
-    <div v-else  class="jumbotron mt-3" style=" transition-delay: 0.3s;">
-          <img src="../../public/logoInstituto.png" width="300" height="100">
-          <img src="../../public/images1.jpg" width="300" height="100" align="right">
-          <hr>
-          <br>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Listar Cursos</a>
-            </li> 
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Alta de Curso</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Solicitudes</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <div v-if="this.getArrayCoordinadores.length">
-            <table class="table">
-              <tr class="titulo">
-                <th>DNI</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Legajo</th>
-                <th>Email</th>
 
-              </tr>
-              <tr v-for="(coordinador,index) in this.getArrayCoordinadores" :key="index" :class="cssEvento(index)">
-                <td>{{ coordinador.dni }}</td>
-                <td>{{ coordinador.nombre }}</td>
-                <td>{{ coordinador.apellido }}</td>
-                <td>{{ coordinador.legajo }}</td>
-                <td>{{ coordinador.email }}</td>
-              </tr>
-            </table>
-          </div>
-          <div v-else class="alert alert-danger">
-                
-          </div>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              
-            <h1>Folmulario Vue</h1>
-          
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-              
-            <h1>Solicitudes</h1>
-          
-            </div>
-          </div>
-          <br>
-          <br>
-          <br>
-
-          
-           <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-    <div class="container text-center">
-      <a class="btn btn-block btn-social btn-twitter">
-    <img src="../../public/Twitter.png" width="40" height="40" border="2" hspace="4" >
-    <img src="../../public/Gmail.png" width="40" height="40" border="2" hspace="4" >
-    <img src="../../public/Facebook.png" width="40" height="40" border="2" hspace="4" >
-  </a>
-      <small>Copyright &copy; Your Website</small>
-    </div>
-  </footer>
-            
-   
-    </div>
-    </div>
-
-    
   </section>
 
 </template>
@@ -167,20 +95,22 @@
 <script lang="js">
 
   import NavbarCoordinador from "./NavbarCoordinador.vue"
+  import FormAgregarAlumno from "./FormAgregarAlumno.vue"
 
   export default  {
-    name: 'src-components-coordinador',
+    name: 'src-components-alumnos-coordinador',
     components: {
-      NavbarCoordinador
+      NavbarCoordinador,
+      FormAgregarAlumno
     },
-    props: ['dni'],
+    props: ['dni','legajo'],
     mounted () {
-      this.$store.dispatch('actionCargarArrayCoordinadores')
-      console.log(this.$store.state.arrayCoordinadores)
+      this.$store.dispatch('actionCargarArrayProfesores')
     },
     data () {
       return {
         estadoButton: true,
+        misDatos: {}
       }
     },
     methods: {
@@ -191,31 +121,52 @@
               'fila-par': (index % 2) != 0
           }
         },
+
+        cssChequearEstadoButton() {
+          if (this.estadoButton)
+            return "margin-left: 16.5%;"
+          else
+            return "transition-delay: 0.3s;"
+        },
+
         mostrarCont(estado) {
         console.log("estado de mostar: ",estado)
         this.estadoButton= estado
       }
     },
     computed: {
-      getArrayCoordinadores(){
-        return this.$store.state.arrayCoordinadores
+      getArrayProfesores(){
+        return this.$store.state.arrayProfesores
       },
 
       getMyLegajo(){
-        // Para saber el legajo lo busco en el array de coordinadores que cargue en vuex
+        // Para saber el legajo lo busco en el array de profesores que cargue en vuex
         
         let resultado = -1
         
-        this.$store.state.arrayCoordinadores.forEach(coordinador => {
-
-          if ( coordinador.dni == this.dni )
+        this.$store.state.arrayProfesores.forEach(profesor => {
+          //console.log("Valor: ", profesor)
+          if ( profesor.dni == this.dni )
           {
-            resultado = coordinador.legajo
+            resultado = profesor.legajo
           }
         });
         return resultado
-      }
+      },
 
+      getMyData() {
+        let resultado
+
+        this.$store.state.arrayProfesores.forEach(profesor => {
+          if ( profesor.dni == this.dni )
+          {
+            resultado = profesor
+          }
+        });
+        return resultado
+      },
+      
+      
       
     }
 }

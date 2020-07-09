@@ -25,7 +25,7 @@
       </router-link>
       </li>
           <li class="nav-item">
-            <router-link :to="`/CursosCoordinador/`">
+            <router-link :to="`/CursosCoordinador/${dni}/${legajo}`">
               <div v-if="buttonCursosCoordinador==true">
             <button type="button" class="btn btn-secondary btn-lg btn-block active"><a class="text-light" href="#">Cursos</a></button>
           </div>
@@ -36,7 +36,7 @@
           </li>
       
           <li class="nav-item">
-            <router-link :to="`/AlumnosCoordinador/`">
+            <router-link :to="`/AlumnosCoordinador/${dni}/${legajo}`">
               <div v-if="buttonAlumnosCoordinador==true">
             <button type="button" class="btn btn-secondary btn-lg btn-block active"><a class="text-light" href="#">Alumnos</a></button>
           </div>
@@ -46,7 +46,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="`/ProfesoresCoordinador/`">
+            <router-link :to="`/ProfesoresCoordinador/${dni}/${legajo}`">
               <div v-if="buttonProfesoresCoordinador==true">
             <button type="button" class="btn btn-secondary btn-lg btn-block active"><a class="text-light" href="#">Profesores</a></button>
           </div>
