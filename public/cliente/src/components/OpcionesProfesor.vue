@@ -11,7 +11,7 @@
         />
 
         <img src="../../public/logoInstituto.png" width="300" height="100" />
-        <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+        <img src="../../public/images1.jpg" width="200" height="100" align="right" />
         <hr />
         
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -47,24 +47,21 @@
             role="tabpanel"
             aria-labelledby="home-tab"
           >
-        
                     <hr>
                     <h4> Mis Datos Personales</h4>
-                    <hr>
-
-                    <FormCambioDatosProfesor :dni="this.dni" :legajo="this.legajo"/>
                     
                     <br>
                     <br>
+                    <FormCambioDatosProfesor :dni="this.dni" :legajo="this.legajo"/>
+     
 
           </div>
 
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-      
                   <hr>
                   <h4> Contactar al Coordinador </h4>
-                  <hr>
+                  
 
                   <br>
                   <br>

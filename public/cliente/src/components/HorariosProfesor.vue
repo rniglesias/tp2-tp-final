@@ -11,7 +11,7 @@
         />
 
         <img src="../../public/logoInstituto.png" width="300" height="100" />
-        <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+        <img src="../../public/images1.jpg" width="200" height="100" align="right" />
         <hr />
          
 

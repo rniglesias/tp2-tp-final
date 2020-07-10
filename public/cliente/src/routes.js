@@ -37,7 +37,7 @@ export default new VueRouter({
       {path: '/CursoDetalles/:idCurso/:nombreCurso/:dniProfesor/:legajo', component: CursoDetalles, props:true},
       {path: '/OpcionesProfesor/:dni/:legajo', component: OpcionesProfesor, props:true},
       {path: '/HorariosProfesor/:dni/:legajo', component: HorariosProfesor, props:true},
-      {path: '/CalificarAlumno/:dniProfesor/:legajo/:dniAlumno', component: CalificarAlumno, props:true},
+      {path: '/CalificarAlumno/:dniProfesor/:legajo/:dniAlumno/:nombreAlumno/:apellidoAlumno', component: CalificarAlumno, props:true},
       {path: '/Coordinador/:dni/', component: Coordinador, props:true},
       {path: '/CursosCoordinador/:dni/:legajo', component: CursosCoordinador, props:true},
       {path: '/AlumnosCoordinador/:dni/:legajo', component: AlumnosCoordinador, props:true},

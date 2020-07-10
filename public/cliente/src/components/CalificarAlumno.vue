@@ -11,10 +11,11 @@
         />
 
         <img src="../../public/logoInstituto.png" width="300" height="100" />
-        <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+        <img src="../../public/images1.jpg" width="200" height="100" align="right" />
         <hr />
 
-        <h4> Calificar alumno: {{dniAlumno}} </h4>
+        <h4> Calificar Alumno: {{ apellidoAlumno }}, {{ nombreAlumno }} </h4>
+        <h4> DNI: {{ dniAlumno }}</h4>
         <hr>
 
         <br>
@@ -22,85 +23,115 @@
          
         <vue-form :state="formState" @submit.prevent="enviar()">
 
-          
+          <div class="container">
+            <div class="row">
+                <div class="class col-md-6">
 
-            <validate tag="div" class="titulo">
-              <label for="nota1">Nota 1</label>
-              <input 
-                type="number"
-                id="nota1"
-                class="form-control"
-                autocomplete="off"
-                name="nota1"
-                placeholder="Ingrese nota 1 del alumno"
-                v-model.number="formData.nota1"
-                :min=1
-                :max=10
-              >
-              <field-messages name="nota1" show="$dirty">
-                <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
-                <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
-                <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
-              </field-messages>
+                    <validate tag="div" class="titulo">
+                        <label for="nota1"><b>Nota Parcial 1</b></label>
+                        <input 
+                          type="number"
+                          id="nota1"
+                          class="form-control"
+                          autocomplete="off"
+                          name="nota1"
+                          placeholder="Ingrese nota 1 del alumno"
+                          v-model.number="formData.nota1"
+                          :min=1
+                          :max=10
+                        >
+                        <field-messages name="nota1" show="$dirty">
+                          <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
+                          <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
+                          <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
+                          <div
+                          v-if="formData.nota1==''"
+                          class="alert alert-danger my-1"
+                        >El campo no tiene nota cargada.  Es correcto?</div>
+                        </field-messages>
 
-            </validate>    
+                    </validate>    
 
-            <br>
-            <br>
+                    <br>
 
-            <validate tag="div" class="titulo">
-              <label for="nota1">Nota 2</label>
-              <input 
-                type="number"
-                id="nota2"
-                class="form-control"
-                autocomplete="off"
-                name="nota2"
-                placeholder="Ingrese nota 2 del alumno"
-                v-model.number="formData.nota2"
-                :min=1
-                :max=10
-              >
-              <field-messages name="nota2" show="$dirty">
-                <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
-                <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
-                <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
-              </field-messages>
+                    <validate tag="div" class="titulo">
+                      <label for="nota1"><b>Nota Parcial 2</b></label>
+                      <input 
+                        type="number"
+                        id="nota2"
+                        class="form-control"
+                        autocomplete="off"
+                        name="nota2"
+                        placeholder="Ingrese nota 2 del alumno"
+                        v-model.number="formData.nota2"
+                        :min=1
+                        :max=10
+                      >
+                      <field-messages name="nota2" show="$dirty">
+                        <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
+                        <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
+                        <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
+                        <div
+                          v-if="formData.nota2==''"
+                          class="alert alert-danger my-1"
+                        >El campo no tiene nota cargada.  Es correcto?</div>
+                      </field-messages>
 
-            </validate>   
+                    </validate>   
 
-            <br>
-            <br>
+                    <br>
 
-            <validate tag="div" class="titulo">
-              <label for="notafinal">Nota Final</label>
-              <input 
-                type="number"
-                id="notafinal"
-                class="form-control"
-                autocomplete="off"
-                name="notafinal"
-                placeholder="Ingrese nota final del alumno"
-                v-model.number="formData.notafinal"
-                :min=1
-                :max=10
-              >
-              <field-messages name="notafinal" show="$dirty">
-                <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
-                <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
-                <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
-              </field-messages>
+                    <validate tag="div" class="titulo">
+                      <label for="notafinal"><b>Nota Final</b></label>
+                      <input 
+                        type="number"
+                        id="notafinal"
+                        class="form-control"
+                        autocomplete="off"
+                        name="notafinal"
+                        placeholder="Ingrese nota final del alumno"
+                        v-model.number="formData.notafinal"
+                        :min=1
+                        :max=10
+                      >
+                      <field-messages name="notafinal" show="$dirty">
+                        <div slot="required" class="alert alert-danger my-1">Campo requerido</div>
+                        <div slot="min" class="alert alert-danger my-1">Nota mínima 1</div>
+                        <div slot="max" class="alert alert-danger my-1">Nota máxima 10</div>
+                        <div
+                          v-if="formData.notafinal==''"
+                          class="alert alert-danger my-1"
+                        >El campo no tiene nota cargada.  Es correcto?</div>
+                      </field-messages>
 
-            </validate>    
-      
-            <br>
-            <br>
-            
+                    </validate>    
+              
+ 
 
-          <button class="btn btn-success my-4" :disabled="formState.$invalid" type="submit">Actualizar calificaciones</button>  
+
+                </div>
+
+             
+                <div class="class col-md-6">
+
+                    <br>
+                    Actualiza la nota de <b>{{ nombreAlumno }}</b> y luego hace 
+                    click en "Actualizar calificaciones", si queres resetear
+                    los campos antes de hacer el envío, presiona "Restablecer calificaciones"
+                    <br>
+                    <br>
+                    <button class="btn btn-success btn-block" :disabled="formState.$invalid" type="submit">Actualizar calificaciones</button>
+
+                    <br>
+                    <button class="btn btn-primary btn-block" type="button" @click="recargarFormulario()" >Restablecer calificaciones</button>
+                </div>
+            </div>
+        </div>
+         
         </vue-form>   
-        
-        <button class="btn btn-success my-4 float:left" @click="recargarFormulario()">Restablecer</button>
+
+       
+    
 
         <hr>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
@@ -129,7 +160,7 @@
     components: {
       NavbarProfesor
     },
-    props: ['dniProfesor','legajo','dniAlumno'],
+    props: ['dniProfesor','legajo','dniAlumno','nombreAlumno','apellidoAlumno'],
     mounted () {
 
       // Cargo las notas del alumno en el formulario

@@ -10,7 +10,7 @@
       />
 
       <img src="../../public/logoInstituto.png" width="300" height="100" />
-      <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+      <img src="../../public/images1.jpg" width="200" height="100" align="right" />
       <hr />
   
       <div v-if="this.getMyData">
@@ -35,7 +35,7 @@
               class="d-block w-100"
               src="../../public/cimg1.jpg"
               alt="First slide"
-              width="1000"
+              width="200"
               height="400"
             />
           </div>
@@ -44,7 +44,7 @@
               class="d-block w-100"
               src="../../public/cimg2.jpg"
               alt="Second slide"
-              width="1000"
+              width="200"
               height="400"
             />
           </div>
@@ -53,7 +53,7 @@
               class="d-block w-100"
               src="../../public/cimg3.jpg"
               alt="Third slide"
-              width="1000"
+              width="200"
               height="400"
             />
           </div>
@@ -136,7 +136,10 @@
     },
     props: ['dni'],
     mounted () {
-      this.$store.dispatch('actionCargarArrayProfesores')
+      //this.$store.dispatch('actionCargarArrayProfesores')
+      
+      // Mixins
+      this.cargarArrayProfesores
     },
     data () {
       return {

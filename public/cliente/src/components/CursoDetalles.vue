@@ -11,7 +11,7 @@
         />
 
       <img src="../../public/logoInstituto.png" width="300" height="100" />
-      <img src="../../public/images1.jpg" width="300" height="100" align="right" />
+      <img src="../../public/images1.jpg" width="200" height="100" align="right" />
       <hr />
       
         <h4>Detalles del curso:  {{nombreCurso}}</h4>
@@ -43,19 +43,19 @@
                 <td>{{ alumno.apellido }}</td>
                 <td>{{ alumno.email }}</td>
                 <td>
-                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}`">
+                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}/${alumno.nombre}/${alumno.apellido}`">
                     <a v-if="alumno.nota1" class="navbar-brand" href="#">{{ alumno.nota1 }}</a>
                     <a v-else class="navbar-brand" href="#">...</a>
                   </router-link>
                 </td>
                 <td>
-                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}`">
+                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}/${alumno.nombre}/${alumno.apellido}`">
                     <a v-if="alumno.nota2" class="navbar-brand" href="#">{{ alumno.nota2 }}</a>
                     <a v-else class="navbar-brand" href="#">...</a>
                   </router-link>
                 </td>
                 <td>
-                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}`">
+                  <router-link :to="`/CalificarAlumno/${dniProfesor}/${legajo}/${alumno.dni}/${alumno.nombre}/${alumno.apellido}`">
                     <a v-if="alumno.notafinal" class="navbar-brand" href="#">{{ alumno.notafinal }}</a>
                     <a v-else class="navbar-brand" href="#">...</a>
                   </router-link>

@@ -8,6 +8,7 @@ import './filters'
 import './form'
 import './bootstrap'
 import './httpClient'
+import './mixins'
 
 Vue.config.productionTip = false
 

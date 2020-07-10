@@ -36,10 +36,6 @@
             >No debe superar los {{ largoConsultaMax }} caracteres</div>
           </field-messages>
         </validate>
-        <br />
-
-
-        <br />
 
 
         <!-- <button class="btn btn-success my-4" :disabled="enviando" type="submit">Enviar</button> -->
@@ -49,10 +45,10 @@
       <hr>
 
       <div v-if="this.getUltimaFechaEnvio != '-'">
-        Mensaje enviado {{this.getUltimaFechaEnvio}}
+        <i>Mensaje enviado {{this.getUltimaFechaEnvio}}</i>
       </div>
       <div v-else>
-        Mensaje sin enviar
+        <i>Mensaje sin enviar</i>
       </div>
 
  
