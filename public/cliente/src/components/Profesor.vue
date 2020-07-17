@@ -2,7 +2,10 @@
   <section class="src-components-profesor">
 
     
+    
+
     <div class="jumbotron mt-3" :style="cssChequearEstadoButton()">
+   
       <NavbarProfesor
         :dni="this.dni"
         :legajo="this.getMyLegajo"
@@ -162,6 +165,7 @@
             return "margin-left: 16.5%;"
           else
             return "transition-delay: 0.3s;"
+            //return "transition: fade 1s 0.3s;"
         },
 
         mostrarCont(estado) {

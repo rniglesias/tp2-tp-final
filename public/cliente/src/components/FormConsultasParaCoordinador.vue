@@ -10,7 +10,7 @@
    
         <vue-form :state="formState" @submit.prevent="enviar()">
         <validate tag="div" class="titulo">
-          <label for="consulta" class="titulo">Consulta:</label>
+          <label for="consulta" class="titulo"><b>Consulta:</b></label>
           <textarea
             type="text"
             id="consulta"
